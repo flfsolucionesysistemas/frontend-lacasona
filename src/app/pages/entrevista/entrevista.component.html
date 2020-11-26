@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Entrevistadas Pendientes</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Teléfono</th>
+              <th>Correo Electrónico</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </thead>
+            <tbody *ngFor = "let usuario of usuariosEntrevistados">
+              <tr>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td>
+                <td>{{usuario.telefono}}</td>
+                <td>{{usuario.email}}</td>
+                <td *ngIf = "identity.nombre == 'Profesional'">
+                  <button type="button" class="btn btn-success" (click)="videoLlamada(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Iniciar Video Llamada">
+                    <i class="fa fa-video-camera" aria-hidden="true"></i></button>
+                </td>
+                <td *ngIf = "identity.nombre == 'Admin'"></td>
+                <td *ngIf = "identity.nombre == 'Profesional'">
+                  <button type="button" class="btn btn-primary" (click)="crearHistoriaClinica(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Crear H.C.">
+                    <i class="fa fa-file" aria-hidden="true"></i></button>
+                </td>
+                <td *ngIf = "identity.nombre == 'Admin'"></td>
+                <td *ngIf = "identity.nombre == 'Profesional'">
+                  <button type="button" class="btn btn-danger" (click)="rechazar(usuario)"
+                  data-toggle="tooltip" data-placement="top" title="Rechazar Consulta">
+                    <i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+                <td *ngIf = "identity.nombre == 'Admin'"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

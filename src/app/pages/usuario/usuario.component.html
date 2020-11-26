@@ -1,0 +1,233 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <select id= "tipo" name="tipo"
+                  [(ngModel)] = "tipo" requerid class="form-control"
+                  (ngModelChange)="onSeleccionarPorTipo(tipo)">
+                  <option *ngFor="let tipo of tiposPersona" [ngValue] = "tipo">
+                      {{tipo.nombre}}        
+                  </option>
+              </select>
+            </div>            
+          </div>
+          <div class="col-md-4 ">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                (click)="buscarUsuariosActivos()">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-4 text-right">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                data-target="#modalAltaEditar" (click)="onNuevoUsuario(modalAltaEdicion)">
+                Nuevo Usuario
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Tipo</th>
+              <th class="text-right" *ngIf="identity.nombre == 'Admin'">Acciones</th>
+            </thead>
+            <tbody *ngFor="let u of usuarios">
+              <tr>
+                <td> {{u.nombre}}</td>
+                <td> {{u.apellido}}</td>
+                <td  class="text-right" *ngIf="identity.nombre == 'Admin'">
+                  <button type="button" class="btn btn-success" data-toggle="modal" 
+                    (click) = "onEditar(modalAltaEdicion,u)" data-target="#modalAltaEditar">
+                    Modificar
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-danger" data-toggle="modal" 
+                    data-target="#eliminarModal" (click)="onBorrar(eliminarModal,u)">
+                    Borrar
+                  </button>      
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #modalAltaEdicion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #accionForm="ngForm" (ngSubmit)="onAccion()">
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Nombre*</label>
+                  <input type="text" class="form-control" name="nombre" 
+                    required [(ngModel)]="usuario.nombre"/>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Apellido*</label>
+                  <input type="text" class="form-control" name="apellido" 
+                    required [(ngModel)]="usuario.apellido"/>
+                </div>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Teléfono*</label>
+                  <input type="tel" class="form-control" name="Teléfono" 
+                    required [(ngModel)]="usuario.telefono"/>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>DNI*</label>
+                  <input type="dni" class="form-control" name="dni" 
+                    required [(ngModel)]="usuario.dni"/>                
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 pl">
+                <div class="form-group">
+                  <label>Correo Elctrónico*</label>
+                  <input type="email" class="form-control" name="email" 
+                    required [(ngModel)]="usuario.email"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                  <br>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                    (click)="onResetPasswd()">Reiniciar Contraseña
+                  </button>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Tipo Usuario*</label>
+                  <select id= "tipoM" name="tipoM"
+                    [(ngModel)] = "tipoM" requerid class="form-control">
+                    <option *ngFor="let tipoM of tiposPersona" [ngValue] = "tipoM">
+                        {{tipoM.nombre}}        
+                    </option>
+                </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Provincia*</label>
+                  <select id= "provincia" name="provincia"
+                      [(ngModel)] = "provincia" requerid class="form-control" 
+                        (ngModelChange)="onSeleccionProvivincia($event)">
+                      <option *ngFor="let provincia of provincias"  [ngValue] = "provincia">
+                          {{provincia.nombre}}        
+                      </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Localidad*</label>
+                  <select id= "localidad" name="localidad"
+                      [(ngModel)] = "localidad" requerid class="form-control"
+                      (ngModelChange)="onSeleccionLocalidad($event)">
+                      <option *ngFor="let localidad of localidades"  [ngValue] = "localidad">
+                          {{localidad.nombre}}        
+                      </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 pl">
+                
+              </div>
+              <div class="col-md-2 pr">
+                <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+                <!-- <div class="form-group">
+                </div> -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL ALTA/MODIFICAR USUARIO -->
+
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #eliminarModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <form #eliminarForm="ngForm" (ngSubmit)="onConfirmaBorrar(usuario)">
+            <div class="row">
+              <div class="col-md-12 pr">
+                <p>Esta seguro de eliminar el usuario {{usuario.apellido}}</p>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-8 pl">
+              </div>
+              <div class="col-md-4 pr">
+                <input type="submit" value= "SI" class="btn btn-success">
+                <input type="button" value= "NO" class="btn btn-danger" (click)="c('Close click')">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL CONSULTA ELIMINAR USUARIO -->
+</div>
+
+
+

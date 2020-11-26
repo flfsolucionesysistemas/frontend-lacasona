@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                data-target="#modalAltaEditar" (click)="onNuevaPatologia(modalAltaEdicion)">
+                Nueva Patologia
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nombre</th>
+              <th style="width: 50%">Descripción</th>
+              <th class="text-right" *ngIf="identity.nombre == 'Admin'">Acciones</th>
+            </thead>
+            <tbody *ngFor="let p of patologias">
+              <tr>
+                <td> {{p.nombre}}</td>
+                <td> {{p.descripcion}}</td>
+                <td  class="text-right" *ngIf="identity.nombre == 'Admin'">
+                  <button type="button" class="btn btn-success" data-toggle="modal" 
+                    (click) = "onEditar(modalAltaEdicion,p)" data-target="#modalAltaEditar">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-danger" data-toggle="modal" 
+                    data-target="#eliminarModal" (click)="onBorrar(eliminarModal,p)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>      
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALTA/MODIFICAR PATOLOGIA -->
+  <ng-template #modalAltaEdicion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+     <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #accionForm="ngForm" (ngSubmit)="onAccion()">
+            <div class="row">
+              <div class="col-md-12 pl">
+                <div class="form-group">
+                  <label>Nombre*</label>
+                  <input type="text" class="form-control" name="nombre" 
+                    required [(ngModel)]="patologia.nombre"/>
+                </div>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-12 pl">
+                <div class="form-group">
+                  <label>Descripción</label>
+                  <textarea type="text" row="5" class="form-control" name="descripcion" 
+                    [(ngModel)]="patologia.descripcion">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 pl">
+              </div>
+              <div class="col-md-2 pr">
+                <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL ALTA/MODIFICAR USUARIO -->
+
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #eliminarModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <form #eliminarForm="ngForm" (ngSubmit)="onConfirmaBorrar(patologia)">
+            <div class="row">
+              <div class="col-md-12 pr">
+                <p>Esta seguro de eliminar la patologia {{patologia.nombre}}</p>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-8 pl">
+              </div>
+              <div class="col-md-4 pr">
+                <input type="submit" value= "SI" class="btn btn-success">
+                <input type="button" value= "NO" class="btn btn-danger" (click)="c('Close click')">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL CONSULTA ELIMINAR USUARIO -->
+</div>

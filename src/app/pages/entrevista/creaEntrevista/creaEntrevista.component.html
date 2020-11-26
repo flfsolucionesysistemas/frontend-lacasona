@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card" *ngIf="!historiaClinicaCreada">
+      <div class="card-header">
+        <h5 class="card-title">PASO 1 - Crear História Clínica</h5>
+      </div>
+
+      <div class="card-body">
+        <form #hcForm="ngForm">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label><h5> Apellido y Nombre</h5></label>
+                <input type="text" class="form-control" value="{{apellidoPaciente}}, {{nombrePaciente}}" disabled>
+                <!-- <label><h5>{{apellidoPaciente}}, {{nombrePaciente}}</h5></label> -->
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label><h5> Email</h5></label>
+                <input type="text" class="form-control" value="{{emailPaciente}} - {{telefonoPaciente}}" disabled>
+                <!-- <label><h5>{{emailPaciente}} - {{telefonoPaciente}}</h5></label> -->
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label><h5> D.N.I</h5></label>
+                <input type="text" class="form-control" name="dni" 
+                  required [(ngModel)]="hc.dni"/>
+                <!-- <input type="text" class="form-control" placeholder="Completar el D.N.I." required> -->
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="hcForm.invalid" (click)= onCrearHC() style="margin-top: 45px;">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>  
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="historiaClinicaCreada">
+      <div class="card-header">
+        <h5 class="card-title">PASO 2 - Crear Tratamiento</h5>
+      </div>
+      <div class="card-body">
+        <form #tratamientoForm="ngForm">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label><h5>Patología</h5></label>
+                <select id= "patologia" name="patologia"
+                  [(ngModel)] = "patologia" requerid class="form-control"
+                  (ngModelChange)="onSeleccionarPatologia(patologia)">
+                  <option *ngFor="let p of patologias" [ngValue] = "p">
+                      {{p.nombre}}        
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <label><h5>Descripción</h5></label>
+                <label><h5>{{descripcionPatologia}}</h5></label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- <div class="col-md-2">
+              <div class="form-group">
+                <label><h5> Costo</h5></label>
+                <input type="text" class="form-control">
+              </div>
+            </div> -->
+            <div class="col-md-12">
+              <div class="form-group">
+                <label><h5> Descripción del Tratamiento</h5></label>
+                <textarea type="text" class="form-control" name="descripcion" 
+                  required [(ngModel)]="tratamiento.descripcion"></textarea>
+                <!-- <textarea type="text" class="form-control" requerid ></textarea> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label><h5> Costo</h5></label>
+                <input type="text" class="form-control" requerid name = "costo" [(ngModel)]="tratamiento.costo">
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="tratamientoForm.invalid" (click)= onCreaTratamiento() style="margin-top: 45px;">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
