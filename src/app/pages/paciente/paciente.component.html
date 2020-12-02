@@ -12,7 +12,7 @@
               <th>Apellido</th>              
               <th>Teléfono</th>
               <th>Correo Electrónico</th>
-              <!-- <th>Acciones</th> -->
+              <th></th>
             </thead>
             <tbody *ngFor = "let usuario of usuariosPacientes">
               <tr>
@@ -20,9 +20,17 @@
                 <td>{{usuario.apellido}}</td>
                 <td>{{usuario.telefono}}</td>
                 <td>{{usuario.email}}</td>
-                <!-- <td *ngIf = "identity.nombre == 'Admin'">
-                  <button type="button" class="btn btn-primary" (click)="crearHistoriaClinica(usuario)">Crear H.C.</button>
-                </td> -->
+                <td *ngIf = "identity.nombre == 'Profesional'">
+                  <button type="button" class="btn btn-success" (click)="onCrearEvolucion(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Crear Evolución">
+                    <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-primary" (click)="onVerHC(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Ver H.C.">
+                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

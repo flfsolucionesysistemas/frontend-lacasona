@@ -7,21 +7,19 @@ import { ToastrService } from "ngx-toastr";
 
 //MODELOS
 import { Usuario } from "../../../modelos/usuario";
-import { Patologia} from "../../../modelos/patologia";
 import { HistoriaClinica } from "../../../modelos/historiaClinica";
-import { Tratamiento } from "../../../modelos/tratamiento";
+import { Registro } from "../../../modelos/registro";
 
 //SERVICIOS
 import { UsuarioService } from "../../../servicios/usuario";
-import { PatologiaService } from "../../../servicios/patologia";
 import { HistoriaClinicaService } from "../../../servicios/historia_clinica"; 
-import { TratamientoService} from '../../../servicios/tratamiento';
+import { ConsultaService } from "../../../servicios/consulta";
 
 @Component({
     selector: 'creaEntrevista-cmp',
     moduleId: module.id,
     templateUrl: 'creaEntrevista.component.html',
-    providers:[UsuarioService,PatologiaService,HistoriaClinicaService,TratamientoService ]
+    providers:[UsuarioService,HistoriaClinicaService,ConsultaService ]
 })
 
 export class CreaEntrevistaComponent implements OnInit{
@@ -35,135 +33,111 @@ export class CreaEntrevistaComponent implements OnInit{
     public usuario:Usuario;
     public nombrePaciente;
     public apellidoPaciente;
-    public emailPaciente;
-    public telefonoPaciente;
+    public cgip;
 
-    public patologias : Patologia[];
-    public descripcionPatologia ;
-    public idPatologia;
     public hc : HistoriaClinica;
 
-    public tratamiento : Tratamiento;
     //BANDERA PARA MOSTRAR O NO LOS CARDS HC Y TRATAMIENTO
     public historiaClinicaCreada;
-    
+    public fecha : Date = new Date();
+
+    public registro:Registro;
+
     constructor(
         private toastr: ToastrService,
         private modalService: NgbModal,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _patologiaServicio: PatologiaService,
         private _usuarioServicio: UsuarioService,
         private _historiaClinica:HistoriaClinicaService,
-        private _tratamientoServicio:TratamientoService
+        private _consultaServicio:ConsultaService
       ){
         this.identity = this._usuarioServicio.getIdentity();
         this.token = this._usuarioServicio.getToken();
-        this.usuario = new Usuario(0,2,1,'','','','','','','','',1);
-        this.hc = new HistoriaClinica(0,0,0,0,'','',0,0,);
-        this.tratamiento = new Tratamiento(0,0,0,'',0,'');
+        this.usuario = new Usuario(0,2,1,'','','','','','','','',1,'');
+
+        this.hc = new HistoriaClinica(0,0,0,0,'','','',0,0,);
         this.historiaClinicaCreada = false;
+        let hoy = new Date();
+        this.registro = new Registro(hoy,0,0,'','','','','',hoy,0,'','','','','','','','','','','');
     }
 
     ngOnInit(){
         // RECIBO EL ID DEL USUARIO PARA CREAR LA H.C. Y CONVERTRLO EN CLIENTE/PACIENTE
         this._route.params.subscribe((params: Params) => this.usuarioParametro = params['idUsuario']);
-        this.buscarUsuario(this.usuarioParametro);        
-        this.buscarPatologiasActivas();
+        this.buscarUsuario(this.usuarioParametro);     
     }
 
-    buscarPatologiasActivas(){
-        let activo = 1;
-        this._patologiaServicio.getPatologiasActivos(activo).toPromise().then((response: any) => {
-            if(response == null){
-              console.log('error');                    
-            }else{
-                this.patologias = response.lista_patologia;
-            }
-          }
-        );  
+    generaCGIP(){
+        let dniLeng = this.registro.numero_documento.length;
+        this.cgip = this.usuario[0].id_localidad + '-' + 
+                    this.registro.numero_documento.substr(dniLeng-3) + '-' +
+                    this.usuario[0].id_persona;
+
+        // this.cgip = this.usuario[0].id_provincia + '-' +
+        //             this.usuario[0].id_localidad + '-' + 
+        //             this.registro.numero_documento.substr(dniLeng-3) + '-' +
+        //             this.usuario[0].id_persona;
     }
 
-    onSeleccionarPatologia(patologia){
-        // console.log(patologia);
-        this.descripcionPatologia = patologia.descripcion;
-        this.idPatologia = patologia.id_patologia;
-        // console.log(this.idPatologia);
-    }
 
     buscarUsuario(idUsuario){
         this._usuarioServicio.getUsuario(idUsuario).toPromise().then((response: any) => {
             if(response == null){
               console.log('error');                    
             }else{
-                
-                this.usuario = response.body;
-
+                this.usuario = response;
+                console.log(response);
                 this.nombrePaciente = this.usuario[0].nombre;
                 this.apellidoPaciente = this.usuario[0].apellido;
-                this.telefonoPaciente = this.usuario[0].telefono;
-                this.emailPaciente = this.usuario[0].email;
 
-                this.hc = new HistoriaClinica(0,
-                                                this.usuario[0].id_persona,
-                                                0,
-                                                this.identity.id_persona,
-                                                '',
-                                                'ACEPTADO',
-                                                this.usuario[0].id_localidad,
-                                                1);
+                let idusuario=this.usuario[0].id_persona;
+                let id_localidad=this.usuario[0].id_localidad;
                 
-                // console.log('usuario', this.usuario[0]);
-                // console.log('hc', this.hc);
+                //FALTA BUSCAR EL ID PROVINCIA
+                this.hc = new HistoriaClinica(0,idusuario,1,this.identity.id_persona,'','','',id_localidad,1);
             }
           }
         );
     }
 
-    onCrearHC(){
-        this._historiaClinica.add(this.hc).toPromise().
-            then((data:any) => {
-                if(!data){
-                    console.log('error');    
-                    //VER BIEN ESTE TEMA, LA DEVOLCUION DE ERRORES, 
-                    //CORREO REPETIDOS ETC.                
-                    this.alertMessage = 'Algo salio mal.';
-                    this.tipoMessage = "alert alert-warning alert-with-icon",
-                    this.showNotification();
-                }
-                    this.historiaClinicaCreada = true;
-                    let dato = data.result.insertId;
-                    // console.log(dato);
-                    this.alertMessage = 'História Clínica creada con éxito, continuar con el tratamiento.';
-                    this.tipoMessage = "alert alert-success alert-with-icon",
-                    this.showNotification();
-
-                    this.tratamiento.id_historia_clinica = dato;
-                }
-            ); 
-
-        this.hc = new HistoriaClinica(0,0,0,0,'','',0,0,);
+    calculaEdad(){
+        var timeDiff = Math.abs(Date.now() - new Date(this.registro.fecha_nacimiento).getTime());
+        this.registro.edad = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     }
 
-    onCreaTratamiento(){
-        this.tratamiento.id_patologia = this.idPatologia;
-        console.log(this.tratamiento);
-        this._tratamientoServicio.add(this.tratamiento).toPromise().
-            then((data:any) => {
-                if(!data){
-                    console.log('error');    
-                    this.alertMessage = 'Algo salio mal.';
-                    this.tipoMessage = "alert alert-warning alert-with-icon",
-                    this.showNotification();
+    onCreaHc(admitido){
+        
+        this.hc.cgip = this.cgip;
+        this.hc.dni = this.registro.numero_documento;
+        this.hc.estado = 'admintido';
+        this.registro.cgip = this.cgip;
+        this.registro.id_cliente = this.usuario[0].id_persona;
+        this.registro.id_profesional = this.identity.id_persona;
 
-                    //SINO PUDO CREAR EL TRATAMIENTO, BORRAR LA HC
+        console.log(this.hc);
+        console.log(this.registro);
+
+        this._historiaClinica.add(this.hc).toPromise().
+            then((data:any) => {
+                if (data.affectedRows > 0){
+
+                    let idHC = data.insertId;
+                    // this.hc = new HistoriaClinica(0,0,0,0,'','','',0,0,);
+                    // console.log(data);
+
+                    //voy consulta para enviar el pdf
+                    // this._consultaServicio.creaPdfYEnviaMail(this.registro).toPromise().
+                    //     then((data:any) => {
+                    //         this.alertMessage = 'História Clínica creada con éxito, continuar con el tratamiento.';
+                    //         this.tipoMessage = "alert alert-success alert-with-icon",
+                    //         this.showNotification();
+                            this._router.navigate(['/creaTratamiento', idHC]);
+                    //     }
+                    // );
                 }
-                    this.alertMessage = 'Tratamiento creado con éxito.';
-                    this.tipoMessage = "alert alert-success alert-with-icon",
-                    this.showNotification();
-                    this._router.navigate(['/entrevista']);
-                }
-            ); 
+            }   
+        ); 
     }
 
     // NOTIFICACION

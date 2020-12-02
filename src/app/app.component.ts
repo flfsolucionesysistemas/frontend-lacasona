@@ -68,7 +68,7 @@ export class AppComponent{
     private _provinciaSericio:ProvinciaService,
     private _turnoServicio:TurnoService
   ){
-    this.usuario = new Usuario(0,3,1,'','','','','','','','',1);
+    this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
     this.titulo = 'la casona web';
     this.subtitulo = 'Bienvenido a tu primer plataforma  de psicoterapia en línea.';
   }
@@ -169,6 +169,7 @@ export class AppComponent{
   onSubmit(){
     this._usuarioServicio.login(this.usuario).toPromise().
       then((data:any) => {
+        console.log(data);
         this.usuario.apellido = data.apellido;
         this.usuario.usuario = data.nombre_usuario;
         this.usuario.id_persona = data.id_persona;
@@ -197,7 +198,7 @@ export class AppComponent{
               localStorage.setItem('token',token);
               
               //PARA QUE EN EL PROXIMO LOGUEO NO APAREZCAN LOS DATOS DEL QUE SE LOGUUEO ANTES
-              this.usuario = new Usuario(0,3,1,'','','','','','','','',1);
+              this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
 
               this.modalService.dismissAll();
               this._router.navigate(['']);
@@ -290,7 +291,7 @@ export class AppComponent{
         }
       ); 
 
-    this.usuario = new Usuario(0,3,1,'','','','','','','','',1);
+    this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
   }
 
   // NOTIFICACION

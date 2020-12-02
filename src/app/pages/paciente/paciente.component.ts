@@ -34,14 +34,14 @@ export class PacienteComponent implements OnInit{
           if(response == null){
             console.log('error');                    
           }else{
+            this.usuariosPacientes = response;
+            // let lista:any[];
+            // lista = response;
             
-            let lista:any[];
-            lista = response;
-            
-            for (let p of Object.keys(response)) {
-              var wregistro = response[p];
-              this.usuariosPacientes = wregistro;
-            }
+            // for (let p of Object.keys(response)) {
+            //   var wregistro = response[p];
+            //   this.usuariosPacientes = wregistro;
+            // }
           }
         }
       );

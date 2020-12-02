@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card" >
+      <div class="card-header">
+        <h5 class="card-title">
+          Indicaciones
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #tratamientoForm="ngForm">
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <h6>programa</h6>
+                <!-- (ngModelChange)="onSeleccionaTratamiento(tratamiento)" -->
+                <select id= "tratamiento" name="tratamiento"
+                  [(ngModel)] = "tratamiento" requerid class="form-control">
+                  <option *ngFor="let tratamiento of tratamientos" [ngValue] = "tratamiento">
+                      {{tratamiento.programa_tratamiento}}        
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          &nbsp;
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>derivacion de psicoterapia &nbsp;&nbsp;
+                  <label><h5>{{tratamiento.derivacion_psicoterapia}}</h5></label>
+                </h6>
+                <h6>Nro sesiones psiquiatricas &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.sesiones_psiquiatricas}}</h5></label>
+                </h6>    
+                <h6>Nro sesiones psicologicas &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.sesiones_psicologicas}}</h5></label>
+                </h6>
+                <h6>Nro sesiones grupales &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.sesiones_grupales}}</h5></label>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <h6>frecuencia &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.frecuencia}}</h5></label>
+                </h6>    
+                <h6>abordaje &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.abordaje}}</h5></label>
+                </h6>
+                <h6>otras prestaciones &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.otras_prestaciones}}</h5></label>
+                </h6>
+                <h6>tiempo probable de tratamiento &nbsp;&nbsp; 
+                  <label><h5>{{tratamiento.tiempo_probable}}</h5></label>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col-md-12" style="text-align: right;"> 
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="tratamientoForm.invalid" (click)= onRelacionar() style="margin-top: 65px;">
+                  Crear
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

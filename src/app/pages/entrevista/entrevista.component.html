@@ -14,7 +14,6 @@
               <th>Correo Electrónico</th>
               <th></th>
               <th></th>
-              <th></th>
             </thead>
             <tbody *ngFor = "let usuario of usuariosEntrevistados">
               <tr>
@@ -30,16 +29,10 @@
                 <td *ngIf = "identity.nombre == 'Admin'"></td>
                 <td *ngIf = "identity.nombre == 'Profesional'">
                   <button type="button" class="btn btn-primary" (click)="crearHistoriaClinica(usuario)"
-                    data-toggle="tooltip" data-placement="top" title="Crear H.C.">
-                    <i class="fa fa-file" aria-hidden="true"></i></button>
+                    data-toggle="tooltip" data-placement="top" title="Crear Registro Entrevista Inicial">
+                    <i class="fa fa-file-o" aria-hidden="true"></i></button>
                 </td>
-                <td *ngIf = "identity.nombre == 'Admin'"></td>
-                <td *ngIf = "identity.nombre == 'Profesional'">
-                  <button type="button" class="btn btn-danger" (click)="rechazar(usuario)"
-                  data-toggle="tooltip" data-placement="top" title="Rechazar Consulta">
-                    <i class="fa fa-trash" aria-hidden="true"></i></button>
-                </td>
-                <td *ngIf = "identity.nombre == 'Admin'"></td>
+                <td *ngIf = "identity.nombre == 'Admin'"></td>                
               </tr>
             </tbody>
           </table>

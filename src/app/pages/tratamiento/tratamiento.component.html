@@ -1,205 +1,203 @@
 <div class="row">
-  <!-- <div class="col-md-4">
-    <div class="card card-user">
-      <div class="image">
-        <img src="assets/img/damir-bosnjak.jpg" alt="...">
-      </div>
-      <div class="card-body">
-        <div class="author">
-          <a href="#">
-            <img class="avatar border-gray" src="assets/img/mike.jpg" alt="...">
-            <h5 class="title">Chet Faker</h5>
-          </a>
-          <p class="description">
-            @chetfaker
-          </p>
-        </div>
-        <p class="description text-center">
-          "I like the way you work it
-          <br> No diggity
-          <br> I wanna bag it up"
-        </p>
-      </div>
-      <div class="card-footer">
-        <hr>
-        <div class="button-container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-6 ml-auto">
-              <h5>12
-                <br>
-                <small>Files</small>
-              </h5>
-            </div>
-            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-              <h5>2GB
-                <br>
-                <small>Used</small>
-              </h5>
-            </div>
-            <div class="col-lg-3 mr-auto">
-              <h5>24,6$
-                <br>
-                <small>Spent</small>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">Team Members</h4>
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                data-target="#modalAltaEditar" (click)="onNuevoTratamiento(modalAltaEdicion)">
+                Nuevo Tratamiento
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        <ul class="list-unstyled team-members">
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                DJ Khaled
-                <br />
-                <span class="text-muted">
-                  <small>Offline</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-md-7 col-7">
-                Creative Tim
-                <br />
-                <span class="text-success">
-                  <small>Available</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <div class="col-md-2 col-2">
-                <div class="avatar">
-                  <img src="assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                </div>
-              </div>
-              <div class="col-ms-7 col-7">
-                Flume
-                <br />
-                <span class="text-danger">
-                  <small>Busy</small>
-                </span>
-              </div>
-              <div class="col-md-3 col-3 text-right">
-                <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> 
-   <div class="col-md-8">
-    <div class="card card-user">
-      <div class="card-header">
-        <h5 class="card-title">Edit Profile</h5>
-      </div>
-      <div class="card-body">
-        <form>
-          <div class="row">
-            <div class="col-md-5 pr-1">
-              <div class="form-group">
-                <label>Company (disabled)</label>
-                <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
-              </div>
-            </div>
-            <div class="col-md-3 px-1">
-              <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" placeholder="Username" value="michael23">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" placeholder="Email">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 pr-1">
-              <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" placeholder="Company" value="Chet">
-              </div>
-            </div>
-            <div class="col-md-6 pl-1">
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" value="Faker">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Address</label>
-                <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 pr-1">
-              <div class="form-group">
-                <label>City</label>
-                <input type="text" class="form-control" placeholder="City" value="Melbourne">
-              </div>
-            </div>
-            <div class="col-md-4 px-1">
-              <div class="form-group">
-                <label>Country</label>
-                <input type="text" class="form-control" placeholder="Country" value="Australia">
-              </div>
-            </div>
-            <div class="col-md-4 pl-1">
-              <div class="form-group">
-                <label>Postal Code</label>
-                <input type="number" class="form-control" placeholder="ZIP Code">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="update ml-auto mr-auto">
-              <button type="submit" class="btn btn-primary btn-round">Update Profile</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div> -->
-  <!-- perfil de usuario -->
-
-  <p>En construcción</p>
+    </div>  
   </div>
+
+  <div class="card-group" *ngFor="let t of tratamientos" style="margin: 1.5em;">
+    <div class="card ">
+      <div class="card-header bg-info">
+        <h6>{{t.programa_tratamiento}}</h6>
+      </div>
+
+      <div class="card-body bg-light">
+        <h6 class="card-text">
+          Der. Psicologica: &nbsp; &nbsp; <label>{{t.derivacion_psicoterapia}}</label></h6>
+        <h6 class="card-text">
+          Ses. Psiquiatricas: &nbsp; &nbsp; <label>{{t.sesiones_psiquiatricas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Psicologicas: &nbsp; &nbsp; <label>{{t.sesiones_psicologicas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Grupales: &nbsp; &nbsp; <label>{{t.sesiones_grupales}}</label></h6>
+        <h6 class="card-text">
+          Frecuencia: </h6> <label><h6> {{t.frecuencia}}</h6></label>
+        <h6 class="card-text">
+          O. Prestaciones:</h6> <label><h6>{{t.otras_prestaciones}}</h6></label>  
+        <h6 class="card-text">
+          T. Probable:</h6> <label><h6>{{t.tiempo_probable}}</h6></label>                                            
+      </div>
+      
+      <div class="card-footer">
+        <button type="button" class="btn btn-success" data-toggle="modal" 
+          (click) = "onEditar(modalAltaEdicion,t)" data-target="#modalAltaEditar">
+          <i class="fa fa-edit" aria-hidden="true"></i>
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" data-toggle="modal" 
+          data-target="#eliminarModal" (click)="onBorrar(eliminarModal,t)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALTA/MODIFICAR PATOLOGIA -->
+  <ng-template #modalAltaEdicion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+     <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #accionForm="ngForm" (ngSubmit)="onAccion()">
+            <div class="row">
+              <div class="col-md-12 pl">
+                <div class="form-group">
+                  <label>Programa Tratamiento*</label>
+                  <input type="text" class="form-control" name="nombre" 
+                    required [(ngModel)]="tratamiento.programa_tratamiento">
+                </div>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-12 pl">
+                <div class="form-group">
+                  <label>Der. Psicoterapia</label>
+                  <input type="text" class="form-control" name="derivacion_psicoterapia" 
+                    [(ngModel)]="tratamiento.derivacion_psicoterapia">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Ses. Psiquiatricas:</label>
+                  <input type="text" class="form-control" name="sesiones_psiquiatricas" 
+                    [(ngModel)]="tratamiento.sesiones_psiquiatricas">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Ses. Psicologicas</label>
+                  <input type="text" class="form-control" name="sesiones_psicologicas" 
+                    [(ngModel)]="tratamiento.sesiones_psicologicas">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Ses. Grupales</label>
+                  <input type="text" class="form-control" name="sesiones_grupales" 
+                    [(ngModel)]="tratamiento.sesiones_grupales">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Frecuencia</label>
+                  <input type="text" class="form-control" name="frecuencia" 
+                    [(ngModel)]="tratamiento.frecuencia">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Abordaje</label>
+                  <input type="text" class="form-control" name="abordaje" 
+                    [(ngModel)]="tratamiento.abordaje">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>O. Prestaciones</label>
+                  <input type="text" class="form-control" name="otras_prestaciones" 
+                    [(ngModel)]="tratamiento.otras_prestaciones">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>T. Probable</label>
+                  <input type="text" class="form-control" name="tiempo_probable" 
+                    [(ngModel)]="tratamiento.tiempo_probable">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 pl">
+              </div>
+              <div class="col-md-2 pr">
+                <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL ALTA/MODIFICAR USUARIO -->
+
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #eliminarModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <form #eliminarForm="ngForm" (ngSubmit)="onConfirmaBorrar(tratamiento)">
+            <div class="row">
+              <div class="col-md-12 pr">
+                <p>Esta seguro de eliminar el tratamiento {{tratamiento.programa_tratamiento}}</p>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-8 pl">
+              </div>
+              <div class="col-md-4 pr">
+                <input type="submit" value= "SI" class="btn btn-success">
+                <input type="button" value= "NO" class="btn btn-danger" (click)="c('Close click')">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL CONSULTA ELIMINAR USUARIO -->
+</div>
