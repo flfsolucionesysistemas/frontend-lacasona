@@ -10,7 +10,9 @@ import {GLOBAL} from './global';
 import { from } from 'rxjs';
 
 
-import { Turno} from "../modelos/turno";
+import { Turno } from "../modelos/turno";
+
+
 
 @Injectable()
 export class TurnoService{
@@ -26,5 +28,13 @@ export class TurnoService{
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'turno/getTurnosDisponiblesTipo/'+ tipo, {'headers':headers});
+    }
+
+    delete(turno){
+        let json = JSON.stringify(turno);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'turno/update', params, {'headers':headers});
     }
 }

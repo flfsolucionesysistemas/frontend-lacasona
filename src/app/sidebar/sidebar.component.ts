@@ -27,7 +27,7 @@ export const ROUTESProfesional: RouteInfo[] = [
     { path: '/dashboard',     title: 'Inicio',         icon:'fa fa-home',       class: '' },
     { path: '/user',          title: 'Mi Perfil',      icon:'fa fa-user-circle-o',  class: '' },
     { path: '/paciente',          title: 'Pacientes',      icon:'fa fa-users',  class: '' },
-    { path: '/entrevista',          title: 'Gestión H.C.',      icon:'fa fa-file-text-o',  class: '' },
+    { path: '/entrevista',          title: 'Entrevistas Admisión',      icon:'fa fa-file-text-o',  class: '' },
     { path: '/turno',          title: 'Turnos',      icon:'fa fa-calendar',  class: '' },
     
 ];
@@ -40,7 +40,6 @@ export const ROUTESAdmin: RouteInfo[] = [
     { path: '/turno',         title: 'Turnos',             icon:'fa fa-calendar',    class: '' },
     { path: '/cobranza',         title: 'Cobranzas',             icon:'fa fa-money',    class: '' },
     { path: '/tratamiento',         title: 'Tratamientos',             icon:'fa fa-list-ol',    class: '' },
-    { path: '/patologia',         title: 'Patologias',             icon:'fa fa-superpowers',    class: '' },
     { path: '/paciente',         title: 'Asignar Trunos',             icon:'fa fa-users',    class: '' },
     // { path: '/entrevista',         title: 'Ver H.C.',             icon:'nc-single-02',    class: '' },
     // { path: '/pago',         title: 'Pagos',             icon:'nc-money-coins',    class: '' },    

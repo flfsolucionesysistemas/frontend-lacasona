@@ -1,7 +1,7 @@
 export class Turno{
 	constructor(
 		public id_turno:number,
-		public fecha: string,
+		public fecha: Date,
 		public hora: string,
 		public estado:string,
 		public observacion:string,

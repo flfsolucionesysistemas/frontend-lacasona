@@ -30,7 +30,7 @@ export class UsuarioComponent implements OnInit{
     public identity;  
     public token;
     public errorMessage;
-
+    public matricula = false;
     public localidades : Localidad[];
     public localidadSeleccionada: number;
     public provincias: Provincia[];
@@ -56,7 +56,7 @@ export class UsuarioComponent implements OnInit{
         ){
         this.identity = this._usuarioServicio.getIdentity();
         this.token = this._usuarioServicio.getToken();
-        this.usuario = new Usuario(0,2,1,'','','','','','','','',1);
+        this.usuario = new Usuario(0,2,1,'','','','','','','','',1,'');
     }
     
     
@@ -92,7 +92,7 @@ export class UsuarioComponent implements OnInit{
             if(response == null){
                 console.log('error');                    
             }else{
-                console.log(response);
+                // console.log(response);
                 let lista:any[];
                 lista = response;
                 for (let p of Object.keys(response)) {
@@ -113,15 +113,24 @@ export class UsuarioComponent implements OnInit{
                 // console.log(response);
                 // let lista:any[];
                 // lista = response;
-                for (let p of Object.keys(response)) {
-                    var wregistro = response[p];
-                    this.usuarios = wregistro;
-                    }
-                }
+                this.usuarios = response;
+                // for (let p of Object.keys(response)) {
+                //     var wregistro = response[p];
+                //     this.usuarios = wregistro;
+                //     }
+                // }
             }
-        );
+        });
     }
 
+    onSeleccionarTipoUsuario(tipo){
+        if(tipo.nombre=='Profesional'){
+            this.matricula = true;
+        }
+        else{
+            this.matricula = false;
+        }
+    }
 
     onConfirmaBorrar(usuario){
         this._usuarioServicio.delete(usuario.id_persona).toPromise().then((data: any) => {
@@ -172,7 +181,7 @@ export class UsuarioComponent implements OnInit{
 
     onNuevoUsuario(modalAltaEdicion){
         this.buscarProvincias();
-        this.usuario = new Usuario(0,0,0,'','','','','','','','',1);
+        this.usuario = new Usuario(0,0,0,'','','','','','','','',1,'');
         this.alta = true;
         this.tituloModal = 'Crear Usuario';
         this.modalService.open(modalAltaEdicion).result.then( 
@@ -191,21 +200,24 @@ export class UsuarioComponent implements OnInit{
             if(response == null){
               console.log('error');                    
             }else{
-                for (let p of Object.keys(response)) {
-                    var wregistro = response[p];
-                    this.usuariosAux = wregistro;
-                }
-                var list = [];
-                var len  = this.tiposPersona.length;
-                for (var j = 0, len2 = this.usuariosAux.length; j < len2; j++){
-                    for (var i = 0, len = len ; i < len; i++){
-                        if(this.usuariosAux[j].id_tipo_persona === this.tiposPersona[i].id_tipo_persona){
-                            list.push(this.usuariosAux[j]); 
-                        }
-                    }
-                } 
+                console.log(response.body);
+                this.usuarios = response.body;
+         
+                // for (let p of Object.keys(response.body)) {
+                //     var wregistro = response.body[p];
+                //     this.usuariosAux = wregistro;
+                // }
+                // var list = [];
+                // var len  = this.tiposPersona.length;
+                // for (var j = 0, len2 = this.usuariosAux.length; j < len2; j++){
+                //     for (var i = 0, len = len ; i < len; i++){
+                //         if(this.usuariosAux[j].id_tipo_persona === this.tiposPersona[i].id_tipo_persona){
+                //             list.push(this.usuariosAux[j]); 
+                //         }
+                //     }
+                // } 
 
-                this.usuarios = list;
+                // this.usuarios = list;
                 //ORDENO LA LISTA SEGUN EL NOMBRE
                 // this.usuarios.sort((a, b) => (a.apellido < b.apellido) ? 1 : -1)
             }
@@ -225,7 +237,8 @@ export class UsuarioComponent implements OnInit{
         }
     }
 
-    onAccion(){ 
+    onAccion(){
+        this.usuario.id_localidad = this.localidadSeleccionada; 
         if(this.alta){
             this._usuarioServicio.add(this.usuario).toPromise().
             then((data:any) => {
@@ -251,7 +264,6 @@ export class UsuarioComponent implements OnInit{
             this._usuarioServicio.update(this.usuario).toPromise().
             then((data:any) => {
                 if(!data){
-                //   console.log('error');    
                   //VER BIEN ESTE TEMA, LA DEVOLCUION DE ERRORES, 
                   //CORREO REPETIDOS ETC.
                   this.alertMessage = 'Algo salio mal.';

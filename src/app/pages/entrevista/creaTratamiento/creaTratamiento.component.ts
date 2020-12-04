@@ -54,33 +54,35 @@ export class CreaTratamientoComponent implements OnInit{
         this.token = this._usuarioServicio.getToken();
 
         this.usuario = new Usuario(0,2,1,'','','','','','','','',1,'');
-        this.tratamiento = new Tratamiento(0,'-','-',0,0,0,'-','-','-','-',1);
+        this.tratamiento = new Tratamiento(0,'-',0,0,0,'-','-','-','-',1);
     }
 
     ngOnInit(){
         // RECIBO EL ID DEL USUARIO PARA CREAR LA H.C. Y CONVERTRLO EN CLIENTE/PACIENTE
         this._route.params.subscribe((params: Params) => this.idHcParametro = params['idHC']);
-        // this.buscarUsuario(this.usuarioParametro);        
+        // this.buscarUsuario(this.idHcParametro);        
+        // console.log(this.idHcParametro);
         this.buscarTratamientosActivos();
     }
 
     buscarTratamientosActivos(){
         this._tratamientoServicio.getTratamientosActivos(1).toPromise().then((response:any) => {
             if (response){
-                console.log(response.lista_tratamientos);
+                // console.log(response.lista_tratamientos);
                 this.tratamientos = response.lista_tratamientos;
             }
         });
     }
 
     onRelacionar(){
+
         this.hc_tratamiento = new Hc_Tratamiento(this.idHcParametro,this.tratamiento.id_tratamiento);
 
-        //  console.log(this.hc_tratamiento);
+        // console.log(this.hc_tratamiento);
         this._hc_tratamientoServicio.add(this.hc_tratamiento).toPromise().
             then((data:any)=>{
                 if(data != null){
-                    this.alertMessage = data.result;
+                    this.alertMessage = data.mensaje;
                     this.tipoMessage = "alert alert-success alert-with-icon",
                     this.showNotification();
                     this._router.navigate(['/paciente']);

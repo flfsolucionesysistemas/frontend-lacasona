@@ -14,28 +14,25 @@ import { PacienteComponent} from "../../pages/paciente/paciente.component";
 import { UsuarioComponent} from "../../pages/usuario/usuario.component";
 import { CreaEntrevistaComponent } from "../../pages/entrevista/creaEntrevista/creaEntrevista.component";
 
+import { CreaTratamientoComponent } from "../../pages/entrevista/creaTratamiento/creaTratamiento.component";
 import { GeneralComponent } from "../../pages/general/general.component";
 import { TurnoComponent } from "../../pages/turno/turno.component";
 import { CobranzaComponent } from "../../pages/cobranza/cobranza.component";
-import { TratamientoComponent} from "../../pages/tratamiento/tratamiento.component";
-import { PatologiaComponent} from "../../pages/patologia/patologia.component";
-
+import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
-    
     { path: 'icons',           component: IconsComponent },
     { path: 'notifications',   component: NotificationsComponent },
     { path: 'table',           component: TableComponent },
-
     { path: 'user',           component: UserComponent },
     { path: 'general', component: GeneralComponent},
     { path: 'turno', component: TurnoComponent},
     { path: 'cobranza', component: CobranzaComponent},
     { path: 'tratamiento', component: TratamientoComponent},
-    { path: 'patologia', component: PatologiaComponent},
     { path: 'entrevista', component: EntrevistaComponent},
     { path: 'paciente', component: PacienteComponent},
     { path: 'usuario', component: UsuarioComponent},
-    { path: 'creaEntrevista/:idUsuario', component:CreaEntrevistaComponent}
+    { path: 'creaEntrevista/:idUsuario', component:CreaEntrevistaComponent},
+    { path: 'creaTratamiento/:idHC', component:CreaTratamientoComponent}
 ];

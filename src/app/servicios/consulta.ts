@@ -23,12 +23,20 @@ export class ConsultaService{
     }
 
     add(consulta){
-        console.log(consulta);
+        // console.log(consulta);
         let json = JSON.stringify(consulta);
         console.log(json);
         let params = json;
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.post(this.url + 'consulta/add', params, {'headers':headers});
+    }
+
+    creaPdfYEnviaMail(registro){
+        let json = JSON.stringify(registro);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.post(this.url + 'consulta/registroEntrevista', params, {'headers':headers});
     }
 }

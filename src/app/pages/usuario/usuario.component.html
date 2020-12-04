@@ -5,7 +5,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col-md-4">
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 0.5em;">
               <select id= "tipo" name="tipo"
                   [(ngModel)] = "tipo" requerid class="form-control"
                   (ngModelChange)="onSeleccionarPorTipo(tipo)">
@@ -39,8 +39,8 @@
             <thead class=" text-primary">
               <th>Nombre</th>
               <th>Apellido</th>
-              <th>Tipo</th>
-              <th class="text-right" *ngIf="identity.nombre == 'Admin'">Acciones</th>
+              <!-- <th>Tipo</th> -->
+              <th class="text-right" *ngIf="identity.nombre == 'Admin'"></th>
             </thead>
             <tbody *ngFor="let u of usuarios">
               <tr>
@@ -122,6 +122,41 @@
                     required [(ngModel)]="usuario.email"/>
                 </div>
               </div>
+              <!-- <div class="col-md-4 pr">
+                <div class="form-group" *ngIf="tipoM.nombre == 'Profesional'">
+                  <label>Matricula*</label>
+                  <input type="matricula" class="form-control" name="matricula" 
+                    required [(ngModel)]="usuario.matricula"/>
+                </div>
+              </div> -->
+            </div>
+
+            <div class="row">
+              <!-- <div class="col-md-6 pl">
+                  <br>
+                  <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                    (click)="onResetPasswd()">Reiniciar Contraseña
+                  </button>
+              </div> -->
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Tipo Usuario*</label>
+                  <select id= "tipoM" name="tipoM"
+                    [(ngModel)] = "tipoM" requerid class="form-control" 
+                    (ngModelChange)="onSeleccionarTipoUsuario(tipoM)">
+                    <option *ngFor="let tipoM of tiposPersona" [ngValue] = "tipoM">
+                        {{tipoM.nombre}}        
+                    </option>
+                </select>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group" *ngIf="matricula">
+                  <label>Matricula*</label>
+                  <input type="text" class="form-control" name="numero_matricula" 
+                    required [(ngModel)]="usuario.numero_matricula"/>
+                </div>
+              </div>
             </div>
 
             <div class="row">
@@ -130,17 +165,6 @@
                   <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
                     (click)="onResetPasswd()">Reiniciar Contraseña
                   </button>
-              </div>
-              <div class="col-md-6 pr">
-                <div class="form-group">
-                  <label>Tipo Usuario*</label>
-                  <select id= "tipoM" name="tipoM"
-                    [(ngModel)] = "tipoM" requerid class="form-control">
-                    <option *ngFor="let tipoM of tiposPersona" [ngValue] = "tipoM">
-                        {{tipoM.nombre}}        
-                    </option>
-                </select>
-                </div>
               </div>
             </div>
 
@@ -171,8 +195,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-10 pl">
-                
+              <div class="col-md-10 pl">              
               </div>
               <div class="col-md-2 pr">
                 <input type="submit" value= "OK"

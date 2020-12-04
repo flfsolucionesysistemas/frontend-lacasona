@@ -23,8 +23,8 @@
       </div>
 
       <div class="card-body bg-light">
-        <h6 class="card-text">
-          Der. Psicologica: &nbsp; &nbsp; <label>{{t.derivacion_psicoterapia}}</label></h6>
+        <!-- <h6 class="card-text">
+          Der. Psicologica: &nbsp; &nbsp; <label>{{t.derivacion_psicoterapia}}</label></h6> -->
         <h6 class="card-text">
           Ses. Psiquiatricas: &nbsp; &nbsp; <label>{{t.sesiones_psiquiatricas}}</label></h6>
         <h6 class="card-text">
@@ -34,9 +34,9 @@
         <h6 class="card-text">
           Frecuencia: </h6> <label><h6> {{t.frecuencia}}</h6></label>
         <h6 class="card-text">
-          O. Prestaciones:</h6> <label><h6>{{t.otras_prestaciones}}</h6></label>  
-        <h6 class="card-text">
           T. Probable:</h6> <label><h6>{{t.tiempo_probable}}</h6></label>                                            
+        <h6 class="card-text">
+          Costo Mensual:</h6> <label><h6>${{t.costo_mensual}}</h6></label>  
       </div>
       
       <div class="card-footer">
@@ -78,7 +78,7 @@
               </div>
             </div>  
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-12 pl">
                 <div class="form-group">
                   <label>Der. Psicoterapia</label>
@@ -86,7 +86,7 @@
                     [(ngModel)]="tratamiento.derivacion_psicoterapia">
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <div class="row">
               <div class="col-md-4">
@@ -132,9 +132,9 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>O. Prestaciones</label>
-                  <input type="text" class="form-control" name="otras_prestaciones" 
-                    [(ngModel)]="tratamiento.otras_prestaciones">
+                  <label>Costo Mensual</label>
+                  <input type="text" class="form-control" name="costo_mensual" maxlength="9" 
+                    [(ngModel)]="tratamiento.costo_mensual">
                 </div>
               </div>
               <div class="col-md-6">

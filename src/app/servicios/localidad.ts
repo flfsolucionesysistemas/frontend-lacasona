@@ -29,4 +29,10 @@ export class LocalidadService{
       
         return this._http.get(this.url + 'global/getLocalidadesPorProvincia/'+ params, {'headers':headers});
     }
+
+    getIdProvinciaPorIdLocalidad(idLocalidad){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'global/getIdProvincias/' + idLocalidad, {'headers':headers});
+    }
 }

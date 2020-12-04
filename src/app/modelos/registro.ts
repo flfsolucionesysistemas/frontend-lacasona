@@ -21,5 +21,7 @@ export class Registro{
 		public diagnostico:string,
 		public tratamiento:string,
 		public farmacologia:string,
+		public adminitido:string,
+		public derivacion_psicoterapia:string,
 	){}
 }

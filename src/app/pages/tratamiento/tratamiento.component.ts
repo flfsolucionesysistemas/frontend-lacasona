@@ -40,7 +40,7 @@ export class TratamientoComponent implements OnInit{
       ){
         this.identity = this._usuarioServicio.getIdentity();
         this.token = this._usuarioServicio.getToken();
-        this.tratamiento = new Tratamiento(0,'','',0,0,0,'','','','',1);
+        this.tratamiento = new Tratamiento(0,'',0,0,0,'','','',1,'');
       }
     
     ngOnInit(){
@@ -59,7 +59,7 @@ export class TratamientoComponent implements OnInit{
     }
   
   onNuevoTratamiento(modalAltaEdicion){
-    this.tratamiento = new Tratamiento(0,'','',0,0,0,'','','','',1);
+    this.tratamiento = new Tratamiento(0,'',0,0,0,'','','',1,'');
     this.alta = true;
     this.tituloModal = 'Crear Tratamiento';
 
@@ -125,7 +125,7 @@ export class TratamientoComponent implements OnInit{
             this.showNotification();
             this.modalService.dismissAll();
             this.buscarTratamientosActivas();
-            this.tratamiento = new Tratamiento(0,'','',0,0,0,'','','','',1);
+            this.tratamiento = new Tratamiento(0,'',0,0,0,'','','',1,'');
           }
         });
     }else{
@@ -137,7 +137,7 @@ export class TratamientoComponent implements OnInit{
             this.showNotification();
             this.modalService.dismissAll();
             this.buscarTratamientosActivas();
-            this.tratamiento = new Tratamiento(0,'','',0,0,0,'','','','',1);
+            this.tratamiento = new Tratamiento(0,'',0,0,0,'','','',1,'');
         });
     }
   }

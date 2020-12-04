@@ -23,12 +23,26 @@
                 <td *ngIf = "identity.nombre == 'Profesional'">
                   <button type="button" class="btn btn-success" (click)="onCrearEvolucion(usuario)"
                     data-toggle="tooltip" data-placement="top" title="Crear Evolución">
-                    <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                    <!-- <i class="fa fa-file-code-o" aria-hidden="true"></i> -->
+                    Evo
                   </button>
                   &nbsp;
-                  <button type="button" class="btn btn-primary" (click)="onVerHC(usuario)"
+                  <button type="button" class="btn btn-primary" (click)="onCrearEvalucion(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Crear Evaluacion">
+                    <!-- <i class="fa fa-file-o" aria-hidden="true"></i> -->
+                    Eva
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-warning" (click)="onVerHC(usuario)"
                     data-toggle="tooltip" data-placement="top" title="Ver H.C.">
-                    <i class="fa fa-file-o" aria-hidden="true"></i>
+                    <!-- <i class="fa fa-file-pdf-o" aria-hidden="true"></i> -->
+                    Ver H.C.
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-sencondary" (click)="onFinHC(usuario)"
+                    data-toggle="tooltip" data-placement="top" title="Ver H.C.">
+                    <!-- <i class="fa fa-file-pdf-o" aria-hidden="true"></i> -->
+                    Fin H.C.
                   </button>
                 </td>
               </tr>

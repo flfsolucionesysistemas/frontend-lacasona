@@ -22,6 +22,30 @@ export class TratamientoService{
         this.url = GLOBAL.url;
     }
 
+    getTratamientosActivos(activo){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'tratamiento/listarActivos/' + activo, {'headers':headers});
+    }
+
+    deleteTratamiento(tratamiento){
+        let json = JSON.stringify(tratamiento);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'tratamiento/update', params, {'headers':headers});
+    }
+
+    update(tratamiento){
+    
+        let json = JSON.stringify(tratamiento);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'tratamiento/update', params, {'headers':headers});
+    }
+
+
     add(tratamiento){
         let json = JSON.stringify(tratamiento);
         let params = json;

@@ -32,7 +32,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <h6>Telefono</h6>
-                <input type="text" class="form-control" [(ngModel)]="registro.telefono" name="telefono">
+                <input type="text" class="form-control" value="{{telefonoPaciente}}" [(ngModel)]="registro.telefono" name="telefono">
               </div>
             </div>
           </div>
@@ -120,9 +120,14 @@
           &nbsp;
 
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
               <div class="form-group">
-                <h6>Código Generado para la Identificación del Pacienteo (CGIP): {{cgip}}</h6>
+                <h6 style="margin-top: 0.5em;">Código Generado para la Identificación del Pacienteo (CGIP): </h6>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <h5 style="color: blue; font-weight:bold;">{{cgip}}</h5>
               </div>
             </div>
           </div>
@@ -181,7 +186,26 @@
                 </textarea>
               </div>
             </div>
-            <div class="col-md-6 pr" style="text-align: right;">
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <h6>derrivacion psicoterapia</h6>
+                <textarea type="text" class="form-control" name="derivacion_psicoterapia" 
+                     [(ngModel)]="registro.derivacion_psicoterapia">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 ">
+              <!-- <div class="form-group">
+                <h6>farmacologia</h6>
+                <textarea type="text" class="form-control" name="farmacologia" 
+                     [(ngModel)]="registro.farmacologia">
+                </textarea>
+              </div> -->
+            </div>
+            <div class="col-md-6 "  style="text-align: right;">
               <div class="form-group" >
                 <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
                   [disabled]="hcForm.invalid" (click)= onCreaHc(1) style="margin-top: 65px;">
@@ -192,11 +216,10 @@
                   No Admitir
                 </button>
               </div>
-            </div>  
+            </div>
           </div>
 
         </form>
-      
       </div>
     </div>
 </div>
