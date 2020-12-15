@@ -171,7 +171,7 @@ export class AppComponent{
       then((data:any) => {
         console.log(data);
         this.usuario.apellido = data.apellido;
-        this.usuario.usuario = data.nombre_usuario;
+        this.usuario.nombre_usuario = data.nombre_usuario;
         this.usuario.id_persona = data.id_persona;
 
         let identity = data;

@@ -1,25 +1,87 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from "../../servicios/usuario";
+import { ToastrService } from "ngx-toastr";
 
+
+// modelos
+import { Provincia } from "../../modelos/provincia";
+// servicios
+import { UsuarioService } from "../../servicios/usuario";
+import { ProvinciaService} from "../../servicios/provincia";
 
 @Component({
     selector: 'general-cmp',
     moduleId: module.id,
     templateUrl: 'general.component.html',
-    providers:[UsuarioService],    
+    providers:[UsuarioService,ProvinciaService],    
 })
 
 export class GeneralComponent implements OnInit{
     public identity;  
     public token;
 
+    public alertMessage;
+    public tipoMessage;
+    public errorMessage;
+
+    public provincias:Provincia[];
+    public provincia:Provincia;
+
     constructor( 
-        private _usuarioServicio:UsuarioService
+        private toastr: ToastrService,
+        private _usuarioServicio:UsuarioService,
+        private _provinciaServicio:ProvinciaService,
       ){
         this.identity = this._usuarioServicio.getIdentity();
         this.token = this._usuarioServicio.getToken();
+        this.provincia = new Provincia(0,'','',0,'');
       }
     
     ngOnInit(){
+      this.buscarProvincias();
     }
+
+    buscarProvincias(){
+      this._provinciaServicio.getProvincias().toPromise().then((response: any) => {
+        if(response == null){
+          console.log('error');                    
+        }else{
+          this.provincias = response.body;
+        }
+      });
+    }
+
+    onAccion(provincia){
+      console.log(provincia);
+      this._provinciaServicio.updateProvincia(provincia).toPromise().then((response: any)=>{
+        if(response == null){
+          console.log('error');                    
+        }else{
+            if(response.sql.affectedRows > 0){
+              this.tipoMessage = "alert alert-success alert-with-icon";
+            }else{
+              this.tipoMessage = "alert alert-danger alert-with-icon";
+            }
+
+            this.alertMessage =  response.mensaje;
+            this.showNotification();
+        }
+      });
+    }
+
+    // NOTIFICACION
+    showNotification() {
+      this.toastr.success(
+          '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">'
+          + this.alertMessage + '</span>',
+          "",
+          {
+          timeOut: 3000,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: this.tipoMessage,
+          positionClass: "toast-top-center"
+          }
+      );
+  }
+
 }

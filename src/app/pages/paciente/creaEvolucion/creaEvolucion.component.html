@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          Registro de Evolución
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #evolucionForm="ngForm">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <h6 style="margin-top: 0.5em;">Paciente </h6>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h5>{{nombreApellidoPaciente}}</h5>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <div class="form-group">
+                <h6 style="margin-top: 0.5em;">CGIP</h6>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h5>{{cgip}}</h5>
+              </div>
+            </div>
+          </div>
+          <!-- &nbsp; -->
+          <div class="row">
+            <div class="col-md-2">
+                <h6 style="margin-top: 0.5em;">Profesional</h6> 
+            </div>
+            <div class="col-md-3">
+              <h5>{{identity.apellido}} {{identity.nombre}}</h5>
+            </div>
+          </div>
+
+
+          &nbsp;
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>Fecha de Práctica</h6> 
+                <h5>{{evolucion.fecha_creacion | date: 'dd-MM-yyyy'}}</h5>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>Hora de inicio *</h6>
+                <input type="time" class="form-control" name="hora_inicio" 
+                  required [(ngModel)]="evolucion.hora_inicio">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>Hora de cierre *</h6>
+                <input type="time" class="form-control" name="hora_cierre" 
+                  required [(ngModel)]="evolucion.hora_cierre">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <!-- <div class="form-group">
+                <h6>Profesional</h6> 
+                <h5>{{identity.apellido}} {{identity.nombre}}</h5>
+              </div> -->
+            </div>
+          </div>  
+          &nbsp;
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <h6>intervenciones realizadas *</h6>
+                <textarea type="text" class="form-control" name="intervenciones_realizadas" 
+                  required [(ngModel)]="evolucion.intervenciones_realizadas">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <h6>respuesta ante la intervencion</h6>
+                <textarea type="text" class="form-control" name="respuesta_intervencion" 
+                     [(ngModel)]="evolucion.respuesta_intervencion">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <h6>otras consideraciones</h6>
+                <textarea type="text" class="form-control" name="consideraciones_evolucion" 
+                     [(ngModel)]="evolucion.consideraciones_evolucion">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <button type="button" class="btn btn-primary"  *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="evolucionForm.invalid" (click)= onEvolucion() style="margin-top: 65px;">
+                  Crear
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div> 
+    </div>
+</div>

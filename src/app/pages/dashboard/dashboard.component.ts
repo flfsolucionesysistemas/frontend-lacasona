@@ -1,257 +1,200 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 
+import { Tratamiento } from "../../modelos/tratamiento";
 
 import { UsuarioService } from "../../servicios/usuario";
+import { TratamientoService } from "../../servicios/tratamiento";
 
 @Component({
     selector: 'dashboard-cmp',
     moduleId: module.id,
+    styleUrls: ['dashboard.style.less'],
     templateUrl: 'dashboard.component.html',
-    providers:[UsuarioService],
+    providers:[UsuarioService, TratamientoService],
 })
 
 export class DashboardComponent implements OnInit{
   public identity;  
   public token;
+  public tratamiento : Tratamiento;
 
-  // public canvas : any;
-  // public ctx;
-  // public chartColor;
-  // public chartEmail;
-  // public chartHours;
   public lista: any[];
+  public timeline;
   public cantidadPacientes;
   public entrevistasPendientes;
-
+  
   constructor( 
-    private _usuarioServicio:UsuarioService
+    private _usuarioServicio:UsuarioService,
+    private _tratamientoServicio: TratamientoService,
   ){
     this.identity = this._usuarioServicio.getIdentity();
     this.token = this._usuarioServicio.getToken();
+    this.tratamiento = new Tratamiento(0,'-',0,0,0,'-','-','-','',1,0);
+    // this.timeline =  [
+    //   {
+    //     ico: 'primary',
+    //     titulo: 'titulo 1',
+    //     texto: 'texto 1'
+    //   },
+    //   {
+    //       ico: 'success',
+    //       titulo: 'titulo 2',
+    //       texto: 'texto 2'
+    //   },
+    //   {
+    //       ico: 'info',
+    //       titulo: 'titulo 3',
+    //       texto: 'texto 3'
+    //   }
+    // ];
+
   }
 
-
-
-
-    ngOnInit(){
-      this.buscarUsuarioTipo(3);
-      this.buscarUsuarioTipo(4);
-
-
-      // this.chartColor = "#FFFFFF";
-
-      // this.canvas = document.getElementById("chartHours");
-      // this.ctx = this.canvas.getContext("2d");
-
-      // this.chartHours = new Chart(this.ctx, {
-      //   type: 'line',
-
-      //   data: {
-      //     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
-      //     datasets: [{
-      //         borderColor: "#6bd098",
-      //         backgroundColor: "#6bd098",
-      //         pointRadius: 0,
-      //         pointHoverRadius: 0,
-      //         borderWidth: 3,
-      //         data: [300, 310, 316, 322, 330, 326, 333, 345, 338, 354]
-      //       },
-      //       {
-      //         borderColor: "#f17e5d",
-      //         backgroundColor: "#f17e5d",
-      //         pointRadius: 0,
-      //         pointHoverRadius: 0,
-      //         borderWidth: 3,
-      //         data: [320, 340, 365, 360, 370, 385, 390, 384, 408, 420]
-      //       },
-      //       {
-      //         borderColor: "#fcc468",
-      //         backgroundColor: "#fcc468",
-      //         pointRadius: 0,
-      //         pointHoverRadius: 0,
-      //         borderWidth: 3,
-      //         data: [370, 394, 415, 409, 425, 445, 460, 450, 478, 484]
-      //       }
-      //     ]
-      //   },
-      //   options: {
-      //     legend: {
-      //       display: false
-      //     },
-
-      //     tooltips: {
-      //       enabled: false
-      //     },
-
-      //     scales: {
-      //       yAxes: [{
-
-      //         ticks: {
-      //           fontColor: "#9f9f9f",
-      //           beginAtZero: false,
-      //           maxTicksLimit: 5,
-      //           //padding: 20
-      //         },
-      //         gridLines: {
-      //           drawBorder: false,
-      //           zeroLineColor: "#ccc",
-      //           color: 'rgba(255,255,255,0.05)'
-      //         }
-
-      //       }],
-
-      //       xAxes: [{
-      //         barPercentage: 1.6,
-      //         gridLines: {
-      //           drawBorder: false,
-      //           color: 'rgba(255,255,255,0.1)',
-      //           zeroLineColor: "transparent",
-      //           display: false,
-      //         },
-      //         ticks: {
-      //           padding: 20,
-      //           fontColor: "#9f9f9f"
-      //         }
-      //       }]
-      //     },
-      //   }
-      // });
-
-
-      // this.canvas = document.getElementById("chartEmail");
-      // this.ctx = this.canvas.getContext("2d");
-      // this.chartEmail = new Chart(this.ctx, {
-      //   type: 'pie',
-      //   data: {
-      //     labels: [1, 2, 3],
-      //     datasets: [{
-      //       label: "Emails",
-      //       pointRadius: 0,
-      //       pointHoverRadius: 0,
-      //       backgroundColor: [
-      //         '#e3e3e3',
-      //         '#4acccd',
-      //         '#fcc468',
-      //         '#ef8157'
-      //       ],
-      //       borderWidth: 0,
-      //       data: [342, 480, 530, 120]
-      //     }]
-      //   },
-
-      //   options: {
-
-      //     legend: {
-      //       display: false
-      //     },
-
-      //     pieceLabel: {
-      //       render: 'percentage',
-      //       fontColor: ['white'],
-      //       precision: 2
-      //     },
-
-      //     tooltips: {
-      //       enabled: false
-      //     },
-
-      //     scales: {
-      //       yAxes: [{
-
-      //         ticks: {
-      //           display: false
-      //         },
-      //         gridLines: {
-      //           drawBorder: false,
-      //           zeroLineColor: "transparent",
-      //           color: 'rgba(255,255,255,0.05)'
-      //         }
-
-      //       }],
-
-      //       xAxes: [{
-      //         barPercentage: 1.6,
-      //         gridLines: {
-      //           drawBorder: false,
-      //           color: 'rgba(255,255,255,0.1)',
-      //           zeroLineColor: "transparent"
-      //         },
-      //         ticks: {
-      //           display: false,
-      //         }
-      //       }]
-      //     },
-      //   }
-      // });
-
-      // var speedCanvas = document.getElementById("speedChart");
-
-      // var dataFirst = {
-      //   data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
-      //   fill: false,
-      //   borderColor: '#fbc658',
-      //   backgroundColor: 'transparent',
-      //   pointBorderColor: '#fbc658',
-      //   pointRadius: 4,
-      //   pointHoverRadius: 4,
-      //   pointBorderWidth: 8,
-      // };
-
-      // var dataSecond = {
-      //   data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-      //   fill: false,
-      //   borderColor: '#51CACF',
-      //   backgroundColor: 'transparent',
-      //   pointBorderColor: '#51CACF',
-      //   pointRadius: 4,
-      //   pointHoverRadius: 4,
-      //   pointBorderWidth: 8
-      // };
-
-      // var speedData = {
-      //   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      //   datasets: [dataFirst, dataSecond]
-      // };
-
-      // var chartOptions = {
-      //   legend: {
-      //     display: false,
-      //     position: 'top'
-      //   }
-      // };
-
-      // var lineChart = new Chart(speedCanvas, {
-      //   type: 'line',
-      //   hover: false,
-      //   data: speedData,
-      //   options: chartOptions
-      // });
+  ngOnInit(){
+    // this.buscarUsuarioTipo(3);
+    // this.buscarUsuarioTipo(4);
+    if(this.identity.nombre == 'Paciente'){
+      this.buscarTratamientoActivoPorPaciente();
+      this.buscarTimeline();
     }
+    
+  }
 
+  buscarTimeline(){
+    this._tratamientoServicio.getTimeline(this.identity.id_persona).toPromise().then((response: any) => {
+      if(response == null){
+        console.log('error');                    
+      }else{
 
-    buscarUsuarioTipo(tipo){
-      this._usuarioServicio.getUsuarioTipo(tipo).toPromise().then((response: any) => {
-          if(response == null){
-            console.log('error');                    
-          }else{
-            this.lista = response;
-            for (let p of Object.keys(response)) {
-              this.lista = response[p];
+        console.log(response.sql);
+        var listaTime = response.sql;
+        var limit = listaTime.length;
+        var nuevoInicio:number = listaTime.length + 1;
+        this.timeline = [];
+
+        //COMPLETO CON LAS FASES AVANZADAS
+        for (var i = 0; i < limit ; i++){
+          switch (listaTime[i].fase){
+            case 1:{
+              var dato = {
+                ico: 'primary',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };                
+              this.timeline.push(dato);
+              break;
             }
-
-            switch (tipo) {
-              case 3:{
-                this.entrevistasPendientes = this.lista.length;  
-                break;
-              }
-              case 4:{
-                this.cantidadPacientes = this.lista.length;  
-                break;
-              } 
+            case 2:{
+              var dato = {
+                ico: 'success',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };    
+              this.timeline.push(dato);
+              break;            
+            }
+            case 3:{
+              var dato = {
+                ico: 'danger',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };    
+              this.timeline.push(dato);
+              break;            
+            }
+            case  4:{
+              var dato = {
+                ico: 'warnig',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };    
+              this.timeline.push(dato);
+              break;            
+            }
+            case  5:{
+              var dato = {
+                ico: 'info',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };    
+              this.timeline.push(dato);
+              break;            
+            }
+            case  6:{
+              var dato = {
+                ico: 'light',
+                titulo: listaTime[i].fase,
+                texto: listaTime[i].consideraciones_evaluacion
+              };    
+              this.timeline.push(dato);
+              break;            
             }
           }
         }
-      );
+
+        //COMPLETO CON LAS FASES NO AVANZADAS
+        for (var i = nuevoInicio; i <= listaTime[0].fases; i++){
+          if(i == nuevoInicio){
+            var datoNo = {
+              ico: 'actual',
+              titulo: i,
+              texto: 'Actual'
+            };    
+            this.timeline.push(datoNo);  
+          }else{
+            var datoNo = {
+              ico: 'gray-dark',
+              titulo: i,
+              texto: 'no completa'
+            };    
+            this.timeline.push(datoNo);
+          }
+        }  
+
+        console.log(this.timeline);
+      }  
+    });
   }
+
+  buscarTratamientoActivoPorPaciente(){
+    this._tratamientoServicio.getTratamientoActivoPorPersonaConInfoTratamiento(this.identity.id_persona).toPromise().then((response: any) => {
+      if(response == null){
+        console.log('error');                    
+      }else{
+        // console.log(response.sql);
+        this.tratamiento = response.sql[0];
+      }  
+    });
+  }
+
+  buscarUsuarioTipo(tipo){
+    this._usuarioServicio.getUsuarioTipo(tipo).toPromise().then((response: any) => {
+        if(response == null){
+          console.log('error');                    
+        }else{
+          this.lista = response;
+          for (let p of Object.keys(response)) {
+            this.lista = response[p];
+          }
+
+          switch (tipo) {
+            case 3:{
+              this.entrevistasPendientes = this.lista.length;  
+              break;
+            }
+            case 4:{
+              this.cantidadPacientes = this.lista.length;  
+              break;
+            } 
+          }
+        }
+      }
+    );
+  }
+
+  onBlog(){
+    window.open('http://lacasonacoop.com/#!/blog/');
+  }
+
 }

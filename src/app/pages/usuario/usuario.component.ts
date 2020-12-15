@@ -30,11 +30,13 @@ export class UsuarioComponent implements OnInit{
     public identity;  
     public token;
     public errorMessage;
-    public matricula = false;
+    // public matricula = false;
     public localidades : Localidad[];
     public localidadSeleccionada: number;
+    public localidad : Localidad;
     public provincias: Provincia[];
     public provinciaSeleccionada: number;
+    public provincia:Provincia;
 
     public usuario:Usuario;
     public usuarios : Usuario[];
@@ -42,6 +44,7 @@ export class UsuarioComponent implements OnInit{
 
     public tiposPersona : Tipos_persona[];
     public tipo : Tipos_persona;
+    tipoSel;
     public tituloModal: string;
     public alta;
     closeResult: string;
@@ -70,10 +73,6 @@ export class UsuarioComponent implements OnInit{
             if(response == null){
               console.log('error');                    
             }else{
-                // console.log(response);
-                // let lista:any[];
-                // lista = response;
-                
                 for (let p of Object.keys(response)) {
                     var wregistro = response[p];
                     this.tiposPersona = wregistro;
@@ -81,7 +80,6 @@ export class UsuarioComponent implements OnInit{
             }
           }
         );
-
         //ORDENO LA LISTA SEGUN EL NOMBRE
         // this.tiposPersona.sort((a, b) => (a.nombre < b.nombre) ? 1 : -1)
     }
@@ -92,7 +90,6 @@ export class UsuarioComponent implements OnInit{
             if(response == null){
                 console.log('error');                    
             }else{
-                // console.log(response);
                 let lista:any[];
                 lista = response;
                 for (let p of Object.keys(response)) {
@@ -124,12 +121,14 @@ export class UsuarioComponent implements OnInit{
     }
 
     onSeleccionarTipoUsuario(tipo){
-        if(tipo.nombre=='Profesional'){
-            this.matricula = true;
-        }
-        else{
-            this.matricula = false;
-        }
+        // if(tipo.nombre=='Profesional'){
+        //     this.matricula = true;
+        // }
+        // else{
+        //     this.matricula = false;
+        // }
+        console.log(tipo);
+        this.tipoSel = tipo.id_tipo_persona;
     }
 
     onConfirmaBorrar(usuario){
@@ -164,19 +163,45 @@ export class UsuarioComponent implements OnInit{
     }
 
     onEditar(modalAltaEdicion, usuario){
-        // console.log(usuario);
         this.usuario = this.usuarios.find(i => i.id_persona === usuario.id_persona);    
         this.buscarProvincias();
-        this.alta = false;
-        this.tituloModal = 'Modificar Usuario';
-        this.modalService.open(modalAltaEdicion).result.then( 
-            (result) => {
-                this.closeResult = `Closed with: ${result}`;
-            },
-            (reason) => {
-                this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-            }
-        );
+
+        this.localidadSeleccionada = this.usuario.id_localidad;
+
+        this._localidadServicio.getIdProvinciaPorIdLocalidad(this.localidadSeleccionada).toPromise().
+            then((response : any) =>{
+                if(response == null){
+                    console.log('error');
+                }else{
+                    this.provinciaSeleccionada = response.body[0].id_provincia;
+                    this.provincia = this.provincias.find(i => i.id_provincia === this.provinciaSeleccionada);    
+
+                    this._localidadServicio.getLocalidadesPorProvincia(this.provincia.id_provincia).toPromise()
+                        .then((response: any) => {
+                            if(response == null){
+                                console.log('error');                    
+                            }else{
+                                this.localidades = response.body;
+                                this.localidad = this.localidades.find(i => i.id_localidad === this.localidadSeleccionada);
+                            }
+                        }
+                    );
+
+                    this.tipo = this.tiposPersona.find(i => i.id_tipo_persona === this.usuario.id_tipo_persona);
+
+                    this.alta = false;
+                    this.tituloModal = 'Modificar Usuario';
+                    
+                    this.modalService.open(modalAltaEdicion).result.then( 
+                        (result) => {
+                            this.closeResult = `Closed with: ${result}`;
+                        },
+                        (reason) => {
+                            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+                        }
+                    );
+                }
+            });
     }
 
     onNuevoUsuario(modalAltaEdicion){
@@ -200,7 +225,7 @@ export class UsuarioComponent implements OnInit{
             if(response == null){
               console.log('error');                    
             }else{
-                console.log(response.body);
+                // console.log(response.body);
                 this.usuarios = response.body;
          
                 // for (let p of Object.keys(response.body)) {
@@ -238,7 +263,12 @@ export class UsuarioComponent implements OnInit{
     }
 
     onAccion(){
+        
         this.usuario.id_localidad = this.localidadSeleccionada; 
+        this.usuario.id_tipo_persona = this.tipoSel;
+        this.usuario.nombre_usuario = this.usuario.dni;
+        this.usuario.clave_usuario = this.usuario.dni;
+        console.log(this.usuario);
         if(this.alta){
             this._usuarioServicio.add(this.usuario).toPromise().
             then((data:any) => {

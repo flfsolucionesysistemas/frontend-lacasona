@@ -3,7 +3,7 @@ export class Turno{
 		public id_turno:number,
 		public fecha: Date,
 		public hora: string,
-		public estado:string,
+		public estado:number,
 		public observacion:string,
 		public id_tipo_turno:number,
 		public turno_tratamiento: number,

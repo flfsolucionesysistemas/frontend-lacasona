@@ -17,7 +17,7 @@
             <div class="col-md-4 text-right" >
               <div class="form-group">
                 <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
-                  data-target="#modalAltaEditar" (click)="onNuevoUsuario(modalAltaEdicion)">
+                  data-target="#modalNuevoTurno" (click)="onNuevoTurno(modalNuevoTurno)">
                   Nuevo Turno
                 </button>
               </div>
@@ -45,7 +45,8 @@
                   <td> {{t.hora}}</td>
                   <td *ngIf="t.estado == '1'"> Libre </td>
                   <td *ngIf="t.estado == '0'"> Asignado </td>
-                  <td> ${{t.costo_base}}</td>
+                  <td *ngIf="t.turno_tratamiento == 0"> ${{t.costo_base}}</td>
+                  <!-- <td *ngIf="t.turno_tratamiento == 1"> ${{t.costo_base}}</td> -->
                   <td  class="text-right" *ngIf="identity.nombre == 'Admin'">
                     <button type="button" class="btn btn-success" data-toggle="modal" 
                       (click) = "onEditar(modalAltaEdicion,t)" data-target="#modalAltaEditar">
@@ -66,8 +67,99 @@
       </div>  
     </div>
 
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #modalNuevoTurno let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <!-- <h4 class="modal-title">Crear Nuevos Turnos</h4> -->
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #accionForm="ngForm" (ngSubmit)="onAccion()">
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <div class="form-group" style="margin-top: 0.5em;">
+                    <label>Tipo Turno *</label>
+                    <select id= "tipoCreacion" name="tipoCreacion"
+                        [(ngModel)] = "tipoCreacion" requerid class="form-control" (ngModelChange)="onNuevoTurnoTipo(tipoCreacion)">
+                        <option>Tratamiento</option>
+                        <option>Entrevista</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 pr" *ngIf="tipoCreacion=='Entrevista'">
+                <label style="margin-top: 0.5em;">Costo Base *</label>
+                <input type="text" class="form-control" name="costo_base" 
+                  required [(ngModel)]="turno.costo_base"/>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Fecha Turnos *</label>
+                  <input type="date" requerid class="form-control" [(ngModel)]="turno.fecha" 
+                    name="fecha">
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Hora de Inicio *</label>
+                  <input type="time" class="form-control" name="hora" 
+                    required [(ngModel)]="hora"/>                
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Cantidad de Turnos *</label>
+                  <input type="text" class="form-control" name="cantidad" 
+                    [(ngModel)]="cantidad" requerid/>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Duracion *</label>
+                  <input type="text" class="form-control" name="duracion" 
+                    [(ngModel)]="duracion" requerid/>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row">
+              <div class="col-md-10 pl">              
+              </div>
+              <div class="col-md-2 pr">
+                <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+                <div class="form-group">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+  <!-- FIN MODAL ALTA/MODIFICAR USUARIO -->
+  
     <!-- MODAL LIMINAR TURNO -->
-  <ng-template #eliminarModal let-c="close" let-d="dismiss">
+  <!-- <ng-template #eliminarModal let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title">{{tituloModal}}</h4>
         <button type="button">
@@ -99,7 +191,7 @@
     </div>
     <div class="modal-footer">
     </div>
-  </ng-template>
+  </ng-template> -->
   <!-- FIN MODAL ELIMINAR turno -->
   </div>
 

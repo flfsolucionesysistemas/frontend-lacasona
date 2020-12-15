@@ -138,7 +138,7 @@ export class CreaEntrevistaComponent implements OnInit{
             this.registro.id_cliente = this.usuario[0].id_persona;
             this.registro.id_profesional = this.identity.id_persona;
             this.registro.telefono = this.usuario[0].telefono;
-            this.registro.adminitido = 'SI';
+            this.registro.adminitido = 'FUE ADMITIDO';
 
             this._historiaClinica.add(this.hc).toPromise().
                 then((data:any) => {
@@ -160,7 +160,7 @@ export class CreaEntrevistaComponent implements OnInit{
             this.registro.id_cliente = this.usuario[0].id_persona;
             this.registro.id_profesional = this.identity.id_persona;
             this.registro.telefono = this.usuario[0].telefono;
-            this.registro.adminitido = 'NO';
+            this.registro.adminitido = 'NO FUE ADMITIDO';
             
             this._consultaServicio.creaPdfYEnviaMail(this.registro).toPromise().
                 then((data1:any) => {

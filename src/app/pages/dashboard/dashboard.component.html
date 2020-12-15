@@ -1,169 +1,108 @@
 <div class="row">
-  <!-- <div class="col-lg-3 col-md-6 col-sm-6" *ngIf="identity.nombre=='Profesional' || identity.nombre=='Admin'">
-    <div class="card card-stats">
-      <div class="card-body ">
+  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
+    <!-- <div class="card">
+      <div class="card-header">        
         <div class="row">
-          <div class="col-5 col-md-2">
-            <div class="icon-big text-center icon-warning">
-              <i class="fa fa-video-camera" aria-hidden="true" style="color:red"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-10">
-            <div class="numbers">
-              <p class="card-category">Entrevistas Pend.</p>
-              <p class="card-title">{{entrevistasPendientes}}<p>
-            </div>
+          <div class="col-md-8">
+            <h4 class="card-title">Tratamiento Vigente</h4>
           </div>
         </div>
       </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-eye" [routerLink]="['/entrevista']"></i>VER 
-        </div>
+    </div> -->
+  </div>
+
+  <div class="col-md-6" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h6>Mi tratamiento: {{tratamiento.programa_tratamiento}}</h6>
+      </div>
+
+      <div class="card-body bg-light">
+        <h6 class="card-text">
+          Ses. Psiquiatricas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psiquiatricas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Psicologicas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psicologicas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Grupales: &nbsp; &nbsp; <label>{{tratamiento.sesiones_grupales}}</label></h6>
+        <h6 class="card-text">
+          Frecuencia: &nbsp; &nbsp; <label>{{tratamiento.frecuencia}}</label></h6>
+        <h6 class="card-text">
+          T. Probable:&nbsp; &nbsp; <label>{{tratamiento.tiempo_probable}}</label></h6>
+        <h6 class="card-text">
+          Costo Mensual:&nbsp; &nbsp; <label>$ {{tratamiento.costo_mensual}}</label></h6>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-md-6 col-sm-6" *ngIf=" identity.nombre=='Admin'">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-2">
-            <div class="icon-big text-center icon-warning">
-              <i class="fa fa-user" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="col-12 col-md-10">
-            <div class="numbers">
-              <p class="card-category">Cant. Pacientes</p>
-              <p class="card-title">{{cantidadPacientes}}<p>
-            </div>
-          </div>
-        </div>
+
+  <div class="col-md-6" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h6>informacion util</h6>
       </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-eye" [routerLink]="['/paciente']"></i>VER  
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- <div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
-      <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-vector text-danger"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Errors</p>
-              <p class="card-title">23
-                <p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-clock-o"></i> In the last hour
-        </div>
+
+      <div class="card-body bg-light">
+        <h6 class="card-text">
+          Proximo Turno: &nbsp; &nbsp; <label>xx/xx/xx</label></h6>
+        <h6 class="card-text">
+          Profesional del proximo turno: &nbsp; &nbsp; <label>XXX xxxx</label></h6>
+        <h6 class="card-text">
+          Proximo Vencimiento de Pago: &nbsp; &nbsp; <label>xx/xx/xx</label></h6>
+        <h6 class="card-text">
+          Próximo Pago: &nbsp; &nbsp; <label>$ XX</label></h6>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-md-6 col-sm-6">
-    <div class="card card-stats">
+
+  <!-- <div class="col-md-2" *ngIf = "identity.nombre == 'Paciente'"> -->
+    <!-- <div class="card ">
+      <div class="card-header bg-info">
+          <h6>Timeline</h6>
+      </div>
       <div class="card-body ">
-        <div class="row">
-          <div class="col-5 col-md-4">
-            <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
-            </div>
-          </div>
-          <div class="col-7 col-md-8">
-            <div class="numbers">
-              <p class="card-category">Followers</p>
-              <p class="card-title">+45K
-                <p>
-            </div>
+          <div class="col-md-12">
+            <div style="display:inline-block;width:100%;overflow-y:auto;">
+            <ul class="timeline timeline-horizontal">
+                <li class="timeline-item" *ngFor="let i of timeline">
+                  <div class="timeline-badge {{i.ico}}" ><i class="glyphicon glyphicon-check"></i></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title" style="margin-top: 1em;">{{i.titulo}}</h4>
+                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{i.texto}}</p>
+                    </div>
+                  </div>
+                </li>
+            </ul>
           </div>
         </div>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-refresh"></i> Update now
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-<div class="row">
- <!-- <div class="col-md-12">
+      </div> -->
+  <!-- </div> -->
+
+  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
     <div class="card ">
-      <div class="card-header ">
-        <h5 class="card-title">Users Behavior</h5>
-        <p class="card-category">24 Hours performance</p>
+      <div class="card-header bg-info">
+          <h6>Linea de tiempo del tratamiento</h6>
       </div>
       <div class="card-body ">
-        <canvas id=chartHours width="400" height="100"></canvas>
-      </div>
-      <div class="card-footer ">
-        <hr>
-        <div class="stats">
-          <i class="fa fa-history"></i> Updated 3 minutes ago
+          <div class="col-md-12">
+            <div style="display:inline-block;width:100%;overflow-y:auto;">
+            <ul class="timeline timeline-horizontal">
+                <li class="timeline-item" *ngFor="let i of timeline">
+                  <div class="timeline-badge {{i.ico}}" ><i class="glyphicon glyphicon-check"></i></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h5 class="timeline-title" >Fase: {{i.titulo}}</h5>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{i.texto}}</p>
+                    </div>
+                  </div>
+                </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </div> -->
-</div>
-<div class="row">
-  <!--<div class="col-md-4">
-    <div class="card ">
-      <div class="card-header ">
-        <h5 class="card-title">Email Statistics</h5>
-        <p class="card-category">Last Campaign Performance</p>
-      </div>
-      <div class="card-body ">
-        <canvas id="chartEmail"></canvas>
-      </div>
-      <div class="card-footer ">
-        <div class="legend">
-          <i class="fa fa-circle text-primary"></i> Opened
-          <i class="fa fa-circle text-warning"></i> Read
-          <i class="fa fa-circle text-danger"></i> Deleted
-          <i class="fa fa-circle text-gray"></i> Unopened
-        </div>
-        <hr>
-        <div class="stats">
-          <i class="fa fa-calendar"></i> Number of emails sent
-        </div>
-      </div>
-    </div>
-  </div>  -->
-  <!-- <div class="col-md-8">
-    <div class="card card-chart">
-      <div class="card-header">
-        <h5 class="card-title">NASDAQ: AAPL</h5>
-        <p class="card-category">Line Chart with Points</p>
-      </div>
-      <div class="card-body">
-        <canvas id="speedChart" width="400" height="100"></canvas>
-      </div>
-      <div class="card-footer">
-        <div class="chart-legend">
-          <i class="fa fa-circle text-info"></i> Tesla Model S
-          <i class="fa fa-circle text-warning"></i> BMW 5 Series
-        </div>
-        <hr/>
-        <div class="card-stats">
-          <i class="fa fa-check"></i> Data information certified
-        </div>
-      </div>
-    </div>
-  </div> -->
+  </div>
 </div>

@@ -24,6 +24,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+// import { FullCalendarModule } from '@fullcalendar/angular';
+// import dayGridPlugin from '@fullcalendar/daygrid';
+// import timeGridPlugin from '@fullcalendar/timegrid';
+// import listPlugin from '@fullcalendar/list';
+// import interactionPlugin from '@fullcalendar/interaction';
+
+// FullCalendarModule.registerPlugins([
+//   dayGridPlugin,
+//   timeGridPlugin,
+//   listPlugin,
+//   interactionPlugin
+// ])
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +46,7 @@ import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     BrowserAnimationsModule,
+    // FullCalendarModule, 
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),

@@ -22,11 +22,18 @@ export class ProvinciaService{
         this.url = GLOBAL.url;
     }
 
+    
     getProvincias(){
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'global/getProvincias', {'headers':headers});
     }
 
-    
+    updateProvincia(provincia){
+        let json = JSON.stringify(provincia);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'global/updateProvincia', params, {'headers':headers});
+    }
 }

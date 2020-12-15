@@ -37,4 +37,20 @@ export class TurnoService{
       
         return this._http.put(this.url + 'turno/update', params, {'headers':headers});
     }
+
+    update(turno){
+        let json = JSON.stringify(turno);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'turno/update', params, {'headers':headers});
+    }
+
+    add(turno){
+        let json = JSON.stringify(turno);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.post(this.url + 'turno/add', params, {'headers':headers});
+    }
 }

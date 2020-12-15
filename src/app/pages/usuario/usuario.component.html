@@ -122,39 +122,26 @@
                     required [(ngModel)]="usuario.email"/>
                 </div>
               </div>
-              <!-- <div class="col-md-4 pr">
-                <div class="form-group" *ngIf="tipoM.nombre == 'Profesional'">
-                  <label>Matricula*</label>
-                  <input type="matricula" class="form-control" name="matricula" 
-                    required [(ngModel)]="usuario.matricula"/>
-                </div>
-              </div> -->
             </div>
 
             <div class="row">
-              <!-- <div class="col-md-6 pl">
-                  <br>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
-                    (click)="onResetPasswd()">Reiniciar Contraseña
-                  </button>
-              </div> -->
               <div class="col-md-6 pl">
                 <div class="form-group">
                   <label>Tipo Usuario*</label>
-                  <select id= "tipoM" name="tipoM"
-                    [(ngModel)] = "tipoM" requerid class="form-control" 
-                    (ngModelChange)="onSeleccionarTipoUsuario(tipoM)">
-                    <option *ngFor="let tipoM of tiposPersona" [ngValue] = "tipoM">
-                        {{tipoM.nombre}}        
+                  <select id= "tipoSel" name="tipoSel"
+                    [(ngModel)] = "tipoSel" requerid class="form-control" 
+                      (ngModelChange)="onSeleccionarTipoUsuario(tipoSel)">
+                    <option *ngFor="let tipoSel of tiposPersona" [ngValue] = "tipoSel">
+                        {{tipoSel.nombre}}        
                     </option>
                 </select>
                 </div>
               </div>
               <div class="col-md-6 pr">
-                <div class="form-group" *ngIf="matricula">
-                  <label>Matricula*</label>
+                <div class="form-group">
+                  <label>Matricula</label>
                   <input type="text" class="form-control" name="numero_matricula" 
-                    required [(ngModel)]="usuario.numero_matricula"/>
+                    [(ngModel)]="usuario.numero_matricula"/>
                 </div>
               </div>
             </div>

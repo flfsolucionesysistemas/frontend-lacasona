@@ -54,7 +54,8 @@ export class CreaTratamientoComponent implements OnInit{
         this.token = this._usuarioServicio.getToken();
 
         this.usuario = new Usuario(0,2,1,'','','','','','','','',1,'');
-        this.tratamiento = new Tratamiento(0,'-',0,0,0,'-','-','-','-',1);
+        // this.tratamiento = new Tratamiento(0,'-',0,0,0,'-','-','-','-',1);
+        this.tratamiento = new Tratamiento(0,'',0,0,0,'','','','',1,0);
     }
 
     ngOnInit(){
@@ -75,10 +76,12 @@ export class CreaTratamientoComponent implements OnInit{
     }
 
     onRelacionar(){
+        let myDate = new Date();
+        let hoy = myDate.getFullYear() + "-" + (myDate.getMonth()+1) + "-" + myDate.getDate();
 
-        this.hc_tratamiento = new Hc_Tratamiento(this.idHcParametro,this.tratamiento.id_tratamiento);
+        this.hc_tratamiento = new Hc_Tratamiento(this.idHcParametro,this.tratamiento.id_tratamiento,hoy);
 
-        // console.log(this.hc_tratamiento);
+        console.log(this.hc_tratamiento);
         this._hc_tratamientoServicio.add(this.hc_tratamiento).toPromise().
             then((data:any)=>{
                 if(data != null){

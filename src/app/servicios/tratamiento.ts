@@ -45,12 +45,23 @@ export class TratamientoService{
         return this._http.put(this.url + 'tratamiento/update', params, {'headers':headers});
     }
 
-
     add(tratamiento){
         let json = JSON.stringify(tratamiento);
         let params = json;
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.post(this.url + 'tratamiento/add', params, {'headers':headers});
+    }
+
+    getTratamientoActivoPorPersonaConInfoTratamiento(idPaciente){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'tratamiento/tratamientoIdPacienteConInfoTratamiento/' + idPaciente, {'headers':headers});
+    }
+
+    getTimeline(idPaciente){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'tratamiento/getTimeline/' + idPaciente, {'headers':headers});
     }
 }

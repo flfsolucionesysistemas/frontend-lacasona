@@ -29,4 +29,12 @@ export class HistoriaClinicaService{
       
         return this._http.post(this.url + 'hc/addHC', params, {'headers':headers});
     }
+    
+    getHCPorPersona(idPersona){
+        // let json = JSON.stringify(tipo);
+        // let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'hc/getHCPorPersona/'+ idPersona, {'headers':headers});
+    }
 }

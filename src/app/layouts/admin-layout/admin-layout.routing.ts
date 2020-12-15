@@ -19,6 +19,9 @@ import { GeneralComponent } from "../../pages/general/general.component";
 import { TurnoComponent } from "../../pages/turno/turno.component";
 import { CobranzaComponent } from "../../pages/cobranza/cobranza.component";
 import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.component";
+import { CreaEvaluacionComponent } from "../../pages/paciente/creaEvaluacion/creaEvaluacion.component";
+import { CreaEvolucionComponent } from "../../pages/paciente/creaEvolucion/creaEvolucion.component";
+import { CreaAltaComponent } from "../../pages/paciente/creaAlta/creaAlta.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -34,5 +37,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'paciente', component: PacienteComponent},
     { path: 'usuario', component: UsuarioComponent},
     { path: 'creaEntrevista/:idUsuario', component:CreaEntrevistaComponent},
-    { path: 'creaTratamiento/:idHC', component:CreaTratamientoComponent}
+    { path: 'creaTratamiento/:idHC', component:CreaTratamientoComponent},
+    { path: 'crearEvolucion/:idPaciente', component:CreaEvolucionComponent},
+    { path: 'crearEvaluacion/:idPaciente', component:CreaEvaluacionComponent},
+    { path: 'crearAlta/:idPaciente', component:CreaAltaComponent},
 ];

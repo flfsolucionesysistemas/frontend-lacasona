@@ -8,9 +8,9 @@ export class Tratamiento{
 		public sesiones_grupales :number, 
 		public frecuencia: string, 
 		public abordaje : string, 
-		// public otras_prestaciones: string,
+		public fases: string,
 		public tiempo_probable :string,
 		public activo:number,
-		public costo_mensual,
+		public costo_mensual:number,
 	){}
 }

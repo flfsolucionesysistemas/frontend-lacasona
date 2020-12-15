@@ -22,4 +22,28 @@ export class Hc_TratamientoService{
       
         return this._http.post(this.url + 'hc/addHCTratamiento', params, {'headers':headers});
     }
+
+    put(hc_tratamiento){
+        let json = JSON.stringify(hc_tratamiento);
+        let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.put(this.url + 'hc/updateHCTratamiento', params, {'headers':headers});
+    }
+
+    getHCTratamientoPorHC(idHC){
+        // let json = JSON.stringify(tipo);
+        // let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'hc/getHCTratamientoPorHC/'+ idHC, {'headers':headers});
+    }
+
+    getHCTratamientoSinFechaAlta(){
+        // let json = JSON.stringify(tipo);
+        // let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'hc/getHCTratamientoSinFechaAlta', {'headers':headers});
+    }
 }
