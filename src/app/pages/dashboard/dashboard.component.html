@@ -29,6 +29,8 @@
         <h6 class="card-text">
           T. Probable:&nbsp; &nbsp; <label>{{tratamiento.tiempo_probable}}</label></h6>
         <h6 class="card-text">
+          Fases:&nbsp; &nbsp; <label> {{tratamiento.fases}}</label></h6>
+        <h6 class="card-text">
           Costo Mensual:&nbsp; &nbsp; <label>$ {{tratamiento.costo_mensual}}</label></h6>
       </div>
     </div>
@@ -83,7 +85,7 @@
   <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
     <div class="card ">
       <div class="card-header bg-info">
-          <h6>Linea de tiempo del tratamiento</h6>
+          <h6>Fases del tratamiento</h6>
       </div>
       <div class="card-body ">
           <div class="col-md-12">

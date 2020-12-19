@@ -118,6 +118,7 @@ export class CreaEvolucionComponent implements OnInit{
                 let myDate = new Date();
                 let hoy = myDate.getFullYear() + "-" + (myDate.getMonth()+1) + "-" + myDate.getDate();
                 this.evolucion = new Evolucion(0,0,hoy,'','','','','','','','',1,0,0);
+                this._router.navigate(['/paciente']);
             }
         })
     }

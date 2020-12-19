@@ -37,6 +37,8 @@
           T. Probable:</h6> <label><h6>{{t.tiempo_probable}}</h6></label>                                            
         <h6 class="card-text">
           Costo Mensual:</h6> <label><h6>${{t.costo_mensual}}</h6></label>  
+        <h6 class="card-text">
+          Cant. Fases:</h6> <label><h6>{{t.fases}}</h6></label>  
       </div>
       
       <div class="card-footer">
@@ -137,11 +139,18 @@
                     [(ngModel)]="tratamiento.costo_mensual">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <div class="form-group">
                   <label>T. Probable</label>
                   <input type="text" class="form-control" name="tiempo_probable" 
                     [(ngModel)]="tratamiento.tiempo_probable">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Cant. Fases</label>
+                  <input type="text" class="form-control" requerid name="fases" 
+                    [(ngModel)]="tratamiento.fases">
                 </div>
               </div>
             </div>

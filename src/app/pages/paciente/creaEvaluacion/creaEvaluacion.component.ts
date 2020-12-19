@@ -36,9 +36,17 @@ export class CreaEvaluacionComponent implements OnInit{
     public cgip;
     public nombreApellidoPaciente;
     public id_hc_tratamiento;
+    public fase;
+    public fasesT;
     public evaluacion : Evolucion;
-    
+
     public fases:any[];
+    coloresFase6 = [{ico: '#fff'},{ico: '#e6f608'},{ico: '#0920f3'},{ ico: '#20f366'},{ ico: '#683ae6'},{ ico: '#f37209'}];
+    coloresFase4 = [{ico: '#fff'},{ico: '#e6f608'},{ico: '#20f366'},{ico: '#f37209'}];  
+  
+    // coloresFase6 = [{ico: 'amarillo'},{ico: 'azul'},{ ico: 'verde'},{ ico: 'violeta'},{ ico: 'naranja'}];
+    // coloresFase4 = [{ico: 'amarillo'},{ico: 'verde'},{ico: 'naranja'}];  
+  
     constructor(
         private toastr: ToastrService,
         private modalService: NgbModal,
@@ -61,18 +69,36 @@ export class CreaEvaluacionComponent implements OnInit{
     ngOnInit(){
         this._route.params.subscribe((params: Params) => this.pacienteParametro = params['idPaciente']);
         this.buscarPaciente(this.pacienteParametro);
-        this.completarFases();
+        //this.completarFases();
+        // alert('cdf');
     }
 
     completarFases(){
         this.fases=[];
-        let cantFase = 6;
+        console.log('fase',this.fasesT);
+        console.log('fase',this.coloresFase4);
         // buscar la cantidad de fases del tratamiento
-        for (var i = 1; i <= cantFase; i++){
-            this.fases.push(i);
+        // con el maximo de fases que envia el metodo GETFASEACTUAL
+        if(this.fasesT == 4){
+            for (var i = 0; i < this.fasesT; i++){
+                var dato = {
+                    ico: this.coloresFase4[i].ico,
+                    fase: i+1
+                };    
+                this.fases.push(dato);
+            }
+        }else{
+            if(this.fasesT == 6){
+                for (var i = 0; i < this.fasesT; i++){
+                    var dato = {
+                        ico: this.coloresFase6[i].ico,
+                        fase: i+1
+                    };
+                    this.fases.push(dato);
+                }
+            }
         }
-
-        // console.log(this.id_hc_tratamiento);
+        console.log(this.fases);
     }
     
     onSeleccionarFase(fase){
@@ -91,6 +117,8 @@ export class CreaEvaluacionComponent implements OnInit{
                     if(response == null){
                         console.log('error');
                     }else{
+                        console.log(response.body);
+
                         let hc = response.body;
                         this.cgip = hc[0].numero_historia_clinica;
                         
@@ -100,11 +128,21 @@ export class CreaEvaluacionComponent implements OnInit{
                             if(response == null){
                                 console.log('error');
                             }else{
-                                // console.log(response.body);
+                                console.log(response.body);
                                 let idT = response.body;
                                 this.id_hc_tratamiento = idT[0].id_hc_tratamiento;
-                                
-                                // console.log(idT[0].id_hc_tratamiento);
+                          
+                                this._hcTratamientoServicio.getFaseActual(this.pacienteParametro).toPromise().then((response : any)=>{
+                                    if(response == null){
+                                        console.log('error');
+                                    }else{
+                                        console.log(response.sql[0].fase);
+                                        this.fase = response.sql[0].fase; 
+                                        this.fasesT = response.sql[0].fases;        
+                                        
+                                        this.completarFases();
+                                    }    
+                                })    
                             }    
                         })
                     }
@@ -135,6 +173,7 @@ export class CreaEvaluacionComponent implements OnInit{
                 let myDate = new Date();
                 let hoy = myDate.getFullYear() + "-" + (myDate.getMonth()+1) + "-" + myDate.getDate();
                 this.evaluacion = new Evolucion(0,0,hoy,'','','','','','','','',0,0,0);
+                this._router.navigate(['/paciente']);
             }
         })
     }

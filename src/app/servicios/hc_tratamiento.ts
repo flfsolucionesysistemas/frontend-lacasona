@@ -39,6 +39,14 @@ export class Hc_TratamientoService{
         return this._http.get(this.url + 'hc/getHCTratamientoPorHC/'+ idHC, {'headers':headers});
     }
 
+    getFaseActual(idPaciente){
+        // let json = JSON.stringify(tipo);
+        // let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'tratamiento/getFaseActual/'+ idPaciente, {'headers':headers});
+    }
+
     getHCTratamientoSinFechaAlta(){
         // let json = JSON.stringify(tipo);
         // let params = json;

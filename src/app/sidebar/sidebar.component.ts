@@ -19,8 +19,8 @@ export const ROUTESPaciente: RouteInfo[] = [
     { path: '/user',          title: 'Mi Perfil',      icon:'fa fa-user-circle-o',  class: '' },
     { path: '/turno',          title: 'Mis Turnos',      icon:'fa fa-calendar',  class: '' },
     { path: '/pago',          title: 'Mis Pagos',      icon:'fa fa-money',  class: '' },
-    // { path: 'http://lacasonacoop.com/#!/blog/',          title: 'La Casona Coop',      icon:'fa fa-file-text-o',  class: '' },
     { path: '/usuario',          title: 'Guardias',      icon:'fa fa-plus-circle',  class: '' },
+    { path: '/blog',          title: 'Mi Blog',      icon:'fa fa-ravelry',  class: '' },
 ];
 
 export const ROUTESProfesional: RouteInfo[] = [

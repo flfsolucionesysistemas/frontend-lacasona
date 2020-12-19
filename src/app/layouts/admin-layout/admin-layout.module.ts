@@ -23,7 +23,7 @@ import { GeneralComponent } from "../../pages/general/general.component";
 import { TurnoComponent} from "../../pages/turno/turno.component";
 import { CobranzaComponent } from "../../pages/cobranza/cobranza.component";
 import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.component";
-
+import { BlogComponent } from "../../pages/blog/blog.component";
 
 
 @NgModule({
@@ -37,6 +37,7 @@ import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.compon
   declarations: [
     DashboardComponent,
     UserComponent,
+    BlogComponent,
     CreaAltaComponent,
     CreaEvolucionComponent,
     CreaEvaluacionComponent,

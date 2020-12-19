@@ -51,28 +51,36 @@
                 <h5>{{evaluacion.fecha_creacion | date: 'dd-MM-yyyy'}}</h5>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="form-group">
                 <h6>Hora de inicio *</h6>
                 <input type="time" class="form-control" name="hora_inicio" 
                   required [(ngModel)]="evaluacion.hora_inicio">
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="form-group">
                 <h6>Hora de cierre *</h6>
                 <input type="time" class="form-control" name="hora_cierre" 
                   required [(ngModel)]="evaluacion.hora_cierre">
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <h6>Fase actual</h6>
+                <h5>{{fase}}</h5>
+              </div> 
+            </div>
+            
+            <div class="col-md-2">
               <div class="form-group">
                 <h6>Fase</h6>
                   <select id= "faseSel" name="faseSel"
                     [(ngModel)] = "faseSel" requerid class="form-control"
                     (ngModelChange)="onSeleccionarFase(faseSel)">
-                    <option *ngFor="let fase of fases" [ngValue] = "fase">
-                        {{fase}}        
+                    <option *ngFor="let fase of fases" [ngStyle]="{'background-color': fase.ico}" [ngValue] = "fase">
+                        {{fase.fase}}        
                     </option>
                   </select>
               </div> 

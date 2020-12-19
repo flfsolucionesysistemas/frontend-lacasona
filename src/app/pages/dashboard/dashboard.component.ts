@@ -23,7 +23,12 @@ export class DashboardComponent implements OnInit{
   public timeline;
   public cantidadPacientes;
   public entrevistasPendientes;
+
   
+  coloresFase6 = [{ico: 'blanco'},{ico: 'amarillo'},{ico: 'azul'},{ ico: 'verde'},{ ico: 'violeta'},{ ico: 'naranja'}];
+
+  coloresFase4 = [{ico: 'blanco'},{ico: 'amarillo'},{ico: 'verde'},{ico: 'naranja'}];  
+
   constructor( 
     private _usuarioServicio:UsuarioService,
     private _tratamientoServicio: TratamientoService,
@@ -31,24 +36,6 @@ export class DashboardComponent implements OnInit{
     this.identity = this._usuarioServicio.getIdentity();
     this.token = this._usuarioServicio.getToken();
     this.tratamiento = new Tratamiento(0,'-',0,0,0,'-','-','-','',1,0);
-    // this.timeline =  [
-    //   {
-    //     ico: 'primary',
-    //     titulo: 'titulo 1',
-    //     texto: 'texto 1'
-    //   },
-    //   {
-    //       ico: 'success',
-    //       titulo: 'titulo 2',
-    //       texto: 'texto 2'
-    //   },
-    //   {
-    //       ico: 'info',
-    //       titulo: 'titulo 3',
-    //       texto: 'texto 3'
-    //   }
-    // ];
-
   }
 
   ngOnInit(){
@@ -58,103 +45,63 @@ export class DashboardComponent implements OnInit{
       this.buscarTratamientoActivoPorPaciente();
       this.buscarTimeline();
     }
-    
   }
 
   buscarTimeline(){
-    this._tratamientoServicio.getTimeline(this.identity.id_persona).toPromise().then((response: any) => {
-      if(response == null){
-        console.log('error');                    
-      }else{
+    // this._tratamientoServicio.getTimeline(this.identity.id_persona).toPromise().then((response: any) => {
+    //   if(response == null){
+    //     console.log('error');                    
+    //   }else{
+    //     var cantFases = response.sql[0].fases;
+    //     var listaTime = response.sql;
+    //     var limit = listaTime.length;
+    //     this.timeline = [];
 
-        console.log(response.sql);
-        var listaTime = response.sql;
-        var limit = listaTime.length;
-        var nuevoInicio:number = listaTime.length + 1;
-        this.timeline = [];
-
-        //COMPLETO CON LAS FASES AVANZADAS
-        for (var i = 0; i < limit ; i++){
-          switch (listaTime[i].fase){
-            case 1:{
-              var dato = {
-                ico: 'primary',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };                
-              this.timeline.push(dato);
-              break;
-            }
-            case 2:{
-              var dato = {
-                ico: 'success',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };    
-              this.timeline.push(dato);
-              break;            
-            }
-            case 3:{
-              var dato = {
-                ico: 'danger',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };    
-              this.timeline.push(dato);
-              break;            
-            }
-            case  4:{
-              var dato = {
-                ico: 'warnig',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };    
-              this.timeline.push(dato);
-              break;            
-            }
-            case  5:{
-              var dato = {
-                ico: 'info',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };    
-              this.timeline.push(dato);
-              break;            
-            }
-            case  6:{
-              var dato = {
-                ico: 'light',
-                titulo: listaTime[i].fase,
-                texto: listaTime[i].consideraciones_evaluacion
-              };    
-              this.timeline.push(dato);
-              break;            
-            }
-          }
-        }
-
-        //COMPLETO CON LAS FASES NO AVANZADAS
-        for (var i = nuevoInicio; i <= listaTime[0].fases; i++){
-          if(i == nuevoInicio){
-            var datoNo = {
-              ico: 'actual',
-              titulo: i,
-              texto: 'Actual'
-            };    
-            this.timeline.push(datoNo);  
-          }else{
-            var datoNo = {
-              ico: 'gray-dark',
-              titulo: i,
-              texto: 'no completa'
-            };    
-            this.timeline.push(datoNo);
-          }
-        }  
-
-        console.log(this.timeline);
-      }  
-    });
+    //     if(cantFases == 6){
+    //       for (var i = 0; i < limit  ; i++){
+    //         var dato = {
+    //           ico: this.coloresFase6[i].ico,
+    //           titulo: listaTime[i].fase,
+    //           texto: listaTime[i].consideraciones_evaluacion
+    //         };    
+    //         this.timeline.push(dato);
+    //       }
+    //     }else{
+    //       if(cantFases == 4){
+    //         for (var i = 0; i < limit; i++){
+    //           var dato = {ñ
+    //             ico: this.coloresFase4[i].ico,
+    //             titulo: listaTime[i].fase - 1,
+    //             texto: listaTime[i].consideraciones_evaluacion
+    //           };                
+    //           this.timeline.push(dato);
+    //         }
+    //       }
+    //     }
+        
+    //     if(cantFases == 6){
+    //       for (var j = limit; j <= listaTime[0].fases; j++){
+    //         var datoNo = {
+    //           ico: 'gray-lighter',
+    //           titulo: j,
+    //           texto: 'Pendiente'
+    //         };    
+    //         this.timeline.push(datoNo);
+    //     }
+    //     }else{
+    //       if(cantFases == 4){
+    //         for (var j = limit; j <= listaTime[0].fases - 1 ; j++){
+    //             var datoNo = {
+    //               ico: 'gray-lighter',
+    //               titulo: j,
+    //               texto: 'Pendiente'
+    //             };    
+    //             this.timeline.push(datoNo);
+    //         }  
+    //     }
+    //   }  
+    //   }
+    // });
   }
 
   buscarTratamientoActivoPorPaciente(){
@@ -162,8 +109,8 @@ export class DashboardComponent implements OnInit{
       if(response == null){
         console.log('error');                    
       }else{
-        // console.log(response.sql);
         this.tratamiento = response.sql[0];
+        // console.log(response);
       }  
     });
   }
@@ -193,8 +140,5 @@ export class DashboardComponent implements OnInit{
     );
   }
 
-  onBlog(){
-    window.open('http://lacasonacoop.com/#!/blog/');
-  }
 
 }

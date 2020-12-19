@@ -5,7 +5,7 @@
 @gray-dark: #333;
 @gray: #555;
 @gray-light: #777;
-@gray-lighter: #eee;
+@gray-lighter: rgb(216, 206, 206);
 @brand-primary: #1f9eba;
 @brand-success: #59ba1f;
 @brand-info: #5bc0de;
@@ -13,6 +13,12 @@
 @brand-danger: #ba1f1f;
 @brand-actual:#999;
 
+@brand-blanco:#777;
+@brand-amarillo:#e6f608;
+@brand-azul:#0920f3;
+@brand-verde: #20f366;
+@brand-violeta:#683ae6;
+@brand-naranja:#f37209;
 
 /* Timeline */
 .timeline {
@@ -80,12 +86,34 @@
 			&.grey-darker {
 				background-color: @gray-darker;
 			}
+			&.gray-lighter {
+				background-color: @gray-lighter;
+			}
+			&.blanco {
+				background-color: @brand-blanco;
+			}
+			&.verde {
+				background-color: @brand-verde;
+			}
+			&.amarillo {
+				background-color: @brand-amarillo;
+			}
+			&.azul {
+				background-color: @brand-azul;
+			}
+			&.violeta {
+				background-color: @brand-violeta;
+			}
+			&.naranja {
+				background-color: @brand-naranja;
+			}
 			&.actual {
 				background-color: @brand-actual;
 			}
-			&.gray-light {
-				background-color: @gray-light;
+			&.gray-lighter {
+				background-color: @gray-lighter;
 			}
+
         }
 		.timeline-panel {
             position: relative;
@@ -151,7 +179,7 @@
         bottom: 26px;
 		left: 56px;
 		right: 0;
-		width: 100%;
+		width: 80%;
 		margin-bottom: 20px;
     }
 	.timeline-item {

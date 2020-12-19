@@ -24,10 +24,29 @@ export class TurnoService{
         this.url = GLOBAL.url;
     }
 
+    getTurnosTodos(){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnos/', {'headers':headers});
+    }
+    
     getTurnos(tipo){
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'turno/getTurnosDisponiblesTipo/'+ tipo, {'headers':headers});
+    }
+
+    // TURNOS PARA LOS PROFESIONALES, SOLO TRAE LOS QUE NO ESTAN RELACIONADOS CON UN PROFESIONAL
+    getTurnosProfesionales(){    
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnosProfesionales/', {'headers':headers});
+    }
+
+    getTurnosPorFecha(fecha){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnoFecha/'+ fecha, {'headers':headers});
     }
 
     delete(turno){

@@ -80,7 +80,6 @@ export class CreaAltaComponent implements OnInit{
                         
                         // CON EL HC BUSCO EL TRATAMIENTO DE HC_TRATAMIENTO, lo necesito cuando guarde la evaluacion
                         let idHC = hc[0].id_historia_clinica;
-                        // console.log(idHC);
                         this._hcTratamientoServicio.getHCTratamientoPorHC(idHC).toPromise().then((response : any)=>{
                             if(response == null){
                                 console.log('error');
@@ -113,24 +112,12 @@ export class CreaAltaComponent implements OnInit{
             if(response == null){
                 console.log('error');
             }else{
-                // console.log(response);
-        //         // if(response.sql.affectedRows > 0){
-        //         //     this.tipoMessage = "alert alert-success alert-with-icon";
-        //         // }else{
-        //         //     this.tipoMessage = "alert alert-danger alert-with-icon";
-        //         // }
-    
                 this.alertMessage =  response.mensaje;
                 this.showNotification();
                 this.hc_tratamiento = new Hc_Tratamiento_alta(0,0,0,'','','');
-        
-        //         // let myDate = new Date();
-        //         // let hoy = myDate.getFullYear() + "-" + (myDate.getMonth()+1) + "-" + myDate.getDate();
-        //         // this.evaluacion = new Evolucion(0,0,hoy,'','','','','','','','',0);
             }
         })
     }
-
 
     // NOTIFICACION
     showNotification() {

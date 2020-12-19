@@ -22,6 +22,7 @@ import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.compon
 import { CreaEvaluacionComponent } from "../../pages/paciente/creaEvaluacion/creaEvaluacion.component";
 import { CreaEvolucionComponent } from "../../pages/paciente/creaEvolucion/creaEvolucion.component";
 import { CreaAltaComponent } from "../../pages/paciente/creaAlta/creaAlta.component";
+import { BlogComponent } from "../../pages/blog/blog.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -41,4 +42,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'crearEvolucion/:idPaciente', component:CreaEvolucionComponent},
     { path: 'crearEvaluacion/:idPaciente', component:CreaEvaluacionComponent},
     { path: 'crearAlta/:idPaciente', component:CreaAltaComponent},
+    { path: 'blog', component:BlogComponent},
 ];
