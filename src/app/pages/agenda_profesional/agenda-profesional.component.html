@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12">
+    en construccion
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-12" *ngIf="identity.nombre_tipo_persona == 'Profesional'" >
+    <div class="card">
+       <div class="card-header">
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Agenda del día</h5>
+          </div>
+        </div>
+      </div>
+      <hr>
+            
+      <div class="card-body">
+        <div class="row">          
+          <div class="col-md-8">
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label><h5>Filtar por Fecha</h5></label>
+              <input type="date" class="form-control" [(ngModel)]="fechaFiltro"  (ngModelChange)="filtrarLista()"
+                name="filtro" id="filtro">
+            </div>
+          </div>
+        </div>
+        
+        <div class="table-responsive scroll" style="max-height: 500px">
+          <table class="table">
+            <thead class=" text-primary">              
+              <th style="max-width: 4em;">Prof. Disp.</th>              
+              <th style="max-width: 2em;">Fecha</th>
+              <th >Inicio</th>
+              <th>Estado</th>
+              <th>Paciente</th>
+            </thead>
+            <tbody *ngFor="let t of turnos">
+              <tr [class.color]="t.profesional_disponible == 0">
+                <td *ngIf = "t.profesional_disponible == 1"  style="text-align: center;  cursor: pointer;">                   
+                  <a (click)="onTrash(t)" data-toggle="tooltip" data-placement="top" title="Marcar como NO DISPONIBLE"><i class="fa fa-close"></i></a>
+                </td>
+                <td *ngIf = "t.profesional_disponible == 0"  style="text-align: center; cursor: pointer;"> 
+                  <a (click)="onCheck(t)"  data-toggle="tooltip" data-placement="top" title="Marcar como DISPONIBLE"><i class="fa fa-check"></i></a>    
+                </td>
+                <td> {{t.fecha | date:'dd-MM-yyyy' : 'UTC'}} </td>
+                <td> {{t.hora}}</td>
+                <td *ngIf="t.estado == '1'"> Libre </td>
+                <td *ngIf="t.estado == '0'"> {{t.observacion}} </td>
+                <th></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

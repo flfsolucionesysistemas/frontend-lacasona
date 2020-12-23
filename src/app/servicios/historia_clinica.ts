@@ -1,16 +1,11 @@
 import {Injectable} from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators'
 
-// import 'rxjs/add/operator/map';
 import { Observable, of } from "rxjs";
 import {GLOBAL} from './global';
 import { from } from 'rxjs';
-
-
-import { Usuario } from "../modelos/usuario";
 
 @Injectable()
 export class HistoriaClinicaService{
@@ -36,5 +31,13 @@ export class HistoriaClinicaService{
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'hc/getHCPorPersona/'+ idPersona, {'headers':headers});
+    }
+
+    getSolicitudResumenHC(idPersona){
+        // let json = JSON.stringify(tipo);
+        // let params = json;
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'global/solicitaHC/'+ idPersona, {'headers':headers});
     }
 }

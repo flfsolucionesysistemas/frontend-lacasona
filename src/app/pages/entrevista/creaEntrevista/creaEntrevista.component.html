@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <h6>Profesional {{identity.nombre_usuario}}</h6>
+                <h6>Profesional {{identity.nombre}}, {{identity.apellido}}</h6>
               </div>
             </div>
           </div>  
@@ -207,11 +207,11 @@
             </div>
             <div class="col-md-6 "  style="text-align: right;">
               <div class="form-group" >
-                <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
+                <button type="button" class="btn btn-primary" *ngIf="identity.nombre_tipo_persona == 'Profesional'" 
                   [disabled]="hcForm.invalid" (click)= onCreaHc(1) style="margin-top: 65px;">
                   Admitir
                 </button>&nbsp;
-                <button type="button" class="btn btn-danger" *ngIf="identity.nombre == 'Profesional'" 
+                <button type="button" class="btn btn-danger" *ngIf="identity.nombre_tipo_persona == 'Profesional'" 
                   [disabled]="hcForm.invalid" (click)= onCreaHc(0) style="margin-top: 65px;">
                   No Admitir
                 </button>

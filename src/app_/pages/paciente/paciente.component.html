@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" *ngIf = "identity.nombre == 'Profesional'">Historias Clinicas Con Tratamiento Vigentes</h4>
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-2 text-right">
+            <!-- <div class="form-group">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="vigentes" [(ngModel)]="vigentes" 
+                  (change)="onBuscarHc()">
+                <label class="custom-control-label" for="vigentes" style="margin-top: 1rem;"><h5>Vigentes</h5></label>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>  
+      <div class="card-body">
+        <!-- <input type=”text” [(ngModel)]=”searchTerm” name=”searchTerm” placeholder=”Search”> -->
+        <!-- <div class="form-group">
+          <input type="text" [(ngModel)] ="buscar" name ="buscar" (change)='filter()'>
+        </div> -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nombre</th>
+              <th>Apellido</th>   
+              <th>
+                DNI
+              </th>           
+              <th style="width: 10%;">Tratamiento </th>
+              <th>Fecha Inicio</th>
+              <th></th>
+            </thead>
+            <tbody *ngFor = "let paciente of hc_tratamientos ">
+              <tr>
+                <td>{{paciente.nombre}}</td>
+                <td>{{paciente.apellido}}</td>
+                <td>{{paciente.dni}}</td>
+                <td>{{paciente.programa_tratamiento}}</td>
+                <td>{{paciente.fecha_inicio | date: 'dd-MM-yyyy'}}</td>
+                <td *ngIf = "identity.nombre == 'Profesional'">                  
+                  <button type="button" class="btn btn-warning" (click)="onVerHC(paciente)"
+                    data-toggle="tooltip" data-placement="top" title="Ver H.C.">
+                    Ver H.C.
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-success" (click)="onCrearEvolucion(paciente)"
+                    data-toggle="tooltip" data-placement="top" title="Crear Evolución">
+                    Evolución
+                  </button>
+                  &nbsp;
+                  <button type="button" class="btn btn-primary" (click)="onCrearEvaluacion(paciente)"
+                    data-toggle="tooltip" data-placement="top" title="Crear Evaluación">
+                    Evaluación
+                  </button>                  
+                  &nbsp;
+                  <button type="button" class="btn btn-sencondary" (click)="onAltaHC(paciente)"
+                    data-toggle="tooltip" data-placement="top" title="Alta H.C.">
+                    Alta H.C.
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

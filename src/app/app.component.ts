@@ -19,8 +19,6 @@ import { TurnoService} from "./servicios/turno";
 import { ConsultaService} from "./servicios/consulta";
 
 
-import { consoleTestResultHandler } from 'tslint/lib/test';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -167,9 +165,8 @@ export class AppComponent{
   }
 
   onSubmit(){
-    this._usuarioServicio.login(this.usuario).toPromise().
+    this._usuarioServicio.login(this.usuario).toPromise().      
       then((data:any) => {
-        console.log(data);
         this.usuario.apellido = data.apellido;
         this.usuario.nombre_usuario = data.nombre_usuario;
         this.usuario.id_persona = data.id_persona;
@@ -177,46 +174,39 @@ export class AppComponent{
         let identity = data;
         this.identity = identity;
                 
-        if(!this.identity.id_persona){
-          alert("El usuario no está correctamente logueado");
-          console.log('error');
-        }else{
-
-          console.log(data);
-          localStorage.setItem('identity', JSON.stringify(identity));          
-                    
-          //BUCAMOS EL TOKEN PARA ENVIAR A CADA PETICION HTTP          
-          this._usuarioServicio.login(this.usuario, 'true').toPromise().
-          then((data:any) => {
-            let token = data.token;
-            this.token = token;
+        localStorage.setItem('identity', JSON.stringify(identity));          
+        //BUCAMOS EL TOKEN PARA ENVIAR A CADA PETICION HTTP          
+        this._usuarioServicio.login(this.usuario, 'true').toPromise().
+        then((data:any) => {
+          let token = data.token;
+          this.token = token;
+          
+          if(this.token <= 0){
+            alert("El token no se ha generado correctamente");
+          }else{
+            //CREAMOS EL ELEMENTO LOCALSTORAGE PARA TENER EL TOKEN DISPONIBLE
+            localStorage.setItem('token',token);
             
-            if(this.token <= 0){
-              alert("El token no se ha generado correctamente");
-            }else{
-              //CREAMOS EL ELEMENTO LOCALSTORAGE PARA TENER EL TOKEN DISPONIBLE
-              localStorage.setItem('token',token);
-              
-              //PARA QUE EN EL PROXIMO LOGUEO NO APAREZCAN LOS DATOS DEL QUE SE LOGUUEO ANTES
-              this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
+            //PARA QUE EN EL PROXIMO LOGUEO NO APAREZCAN LOS DATOS DEL QUE SE LOGUUEO ANTES
+            this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
 
-              this.modalService.dismissAll();
-              this._router.navigate(['']);
-            }
-          }), 
-          error => {
-            var errorMessage = <any>error;
-    
-            if(errorMessage != null){
-              var body = JSON.parse(error._body);
-              this.errorMessage = body.message;
-    
-              console.log(error);
-            }
+            this.modalService.dismissAll();
+            this._router.navigate(['']);
           }
-        } 
+        })
+        .catch((data:any)=>{
+          this.alertMessage = data.error.message;
+          this.tipoMessage = "alert alert-danger alert-with-icon",
+          this.showNotification();
+        });
       }
-    );
+    )
+    .catch((data:any)=>{
+      // console.log(data.error.message);
+      this.alertMessage = data.error.message;
+      this.tipoMessage = "alert alert-danger alert-with-icon",
+      this.showNotification();
+    });
   }
 
   miCasona(content1){
@@ -231,10 +221,9 @@ export class AppComponent{
   }
 
   consulta(content2){
-    // console.log('dale');
     this.buscarProvincias();
-    //BUSCA LOS TURNOS DE TIPO ENTREVISTA 0
     this.buscarTurnosEntrevista(0);
+
     this.modalService.open(content2).result.then( 
       (result) => {
           this.closeResult = `Closed with: ${result}`;
@@ -288,10 +277,18 @@ export class AppComponent{
           this.alertMessage = data.mensaje;
           this.showNotification();
           this.modalService.dismissAll();
+          this.nuevaConsulta = new Consulta('','','','',0,0,0);
+          // this.buscarProvincias();
+          // this.buscarTurnosEntrevista(0);
         }
-      ); 
+      ).catch((data:any)=>{
+        this.alertMessage = "error al crear consulta";
+        this.tipoMessage = "alert alert-danger alert-with-icon",
+        this.showNotification();
+      });; 
 
     this.usuario = new Usuario(0,3,1,'','','','','','','','',1,'');
+    
   }
 
   // NOTIFICACION

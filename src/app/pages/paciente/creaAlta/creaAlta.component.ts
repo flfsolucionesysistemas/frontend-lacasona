@@ -112,9 +112,15 @@ export class CreaAltaComponent implements OnInit{
             if(response == null){
                 console.log('error');
             }else{
+                // if(response.sql.affectedRows > 0){
+                    this.tipoMessage = "alert alert-success alert-with-icon";
+                // }else{
+                //     this.tipoMessage = "alert alert-danger alert-with-icon";
+                // }   
                 this.alertMessage =  response.mensaje;
                 this.showNotification();
                 this.hc_tratamiento = new Hc_Tratamiento_alta(0,0,0,'','','');
+                this._router.navigate(['/paciente']);
             }
         })
     }

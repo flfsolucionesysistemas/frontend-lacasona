@@ -12,8 +12,8 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <label>Provincia</label>
-                <select id= "provincia" name="provincia"
+                <h6>Provincia</h6>
+                <select id= "provincia" name="provincia" 
                     [(ngModel)] = "provincia" requerid class="form-control">
                     <option *ngFor="let provincia of provincias"  [ngValue] = "provincia">
                         {{provincia.nombre}}        
@@ -21,21 +21,23 @@
                 </select>
               </div>
             </div>                                    
-            <div class="col-md-1">
+            <div class="col-md-2">
               <div class="form-group">
-                <label>Factor </label>
+                <h6>Factor </h6>
                 <input type="text" class="form-control" name="factor" 
                   required [(ngModel)]="provincia.factor"/>
               </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3">
               <div class="form-group">
-                <label>Valor de Consulta </label>
+                <h6>Valor de Consulta</h6>
+                <input type="text" class="form-control" name="valor" 
+                  required [(ngModel)]="provincia.factor * precioConsulta" disabled/>
               </div>
             </div>
             <div class="col-md-1" style="margin-top: 1rem;">
               <input type="submit" value= "OK"
-                  [disabled]="accionForm.invalid" class="btn btn-success">
+                  [disabled]="accionForm.invalid" class="btn btn-primary">
             </div>
           </div>
         </form>

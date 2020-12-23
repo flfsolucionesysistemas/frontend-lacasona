@@ -1,5 +1,69 @@
 <div class="row">
-  <!-- <div class="col-md-4">
+   
+  <div class="col-md-12">
+   <div class="card card-user">
+     <div class="card-header">
+       <h5 class="card-title">Modificar Mis Datos</h5>
+     </div>
+     <div class="card-body">
+       <form #accionForm="ngForm" (ngSubmit)="onEditar()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <h6>Nombre</h6>
+              <input type="text" class="form-control" name="nombre" [(ngModel)]="usuario.nombre">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <h6>Apellido</h6>
+              <input type="text" class="form-control" name="apellido" [(ngModel)]="usuario.apellido">
+            </div>
+          </div>
+        </div>  
+        
+        <div class="row" >
+          <div class="col-md-4">
+            <div class="form-group">
+                <h6>Nombre de usuario  </h6>
+                <input type="text" class="form-control" name="nombre_usuario" [(ngModel)]="usuario.nombre_usuario">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <h6>Telefono</h6>
+              <input type="text" class="form-control" name="telefono" [(ngModel)]="usuario.telefono">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <h6 for="exampleInputEmail1">Dirección de correo electrónico</h6>
+              <input type="email" class="form-control" name="email" [(ngModel)]="usuario.email">
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="row">
+            <div class="col-md-10 "></div>
+               <div class="update ml-auto mr-auto">
+               
+               <button type="submit" class="btn btn-primary" 
+               [disabled]="accionForm.invalid">Guardar Datos</button>
+            
+            </div> 
+          </div>
+        </form>
+      </div>
+    </div>
+ </div> 
+ <!-- perfil de usuario -->
+
+ </div>
+
+
+  <!--<div class="row">
+ <div class="col-md-4">
     <div class="card card-user">
       <div class="image">
         <img src="assets/img/damir-bosnjak.jpg" alt="...">
@@ -198,8 +262,6 @@
         </form>
       </div>
     </div>
-  </div> -->
-  <!-- perfil de usuario -->
-
+  </div> 
   <p>En construcción</p>
-  </div>
+  </div>-->

@@ -24,12 +24,24 @@ export class TurnoService{
         this.url = GLOBAL.url;
     }
 
+    getTurnoConsultaPrecio(){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnoConsultaPrecio/', {'headers':headers});
+    }
+
     getTurnosTodos(){
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'turno/getTurnos/', {'headers':headers});
     }
     
+    getTurnosDisponiblesTipoTodos(tipo){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnosDisponiblesTipoTodos/'+ tipo, {'headers':headers});
+    }
+
     getTurnos(tipo){
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
@@ -47,6 +59,12 @@ export class TurnoService{
         let headers = new HttpHeaders({'Content-Type':'application/json'});
       
         return this._http.get(this.url + 'turno/getTurnoFecha/'+ fecha, {'headers':headers});
+    }
+
+    getTurnosPorFechaTipo(fecha,tipo){
+        let headers = new HttpHeaders({'Content-Type':'application/json'});
+      
+        return this._http.get(this.url + 'turno/getTurnoFechaTipo/'+ fecha +'/' + tipo, {'headers':headers});
     }
 
     delete(turno){

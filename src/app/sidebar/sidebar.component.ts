@@ -19,8 +19,9 @@ export const ROUTESPaciente: RouteInfo[] = [
     { path: '/user',          title: 'Mi Perfil',      icon:'fa fa-user-circle-o',  class: '' },
     { path: '/turno',          title: 'Mis Turnos',      icon:'fa fa-calendar',  class: '' },
     { path: '/pago',          title: 'Mis Pagos',      icon:'fa fa-money',  class: '' },
-    { path: '/usuario',          title: 'Guardias',      icon:'fa fa-plus-circle',  class: '' },
+    { path: '/guardia',          title: 'Guardias',      icon:'fa fa-plus-circle',  class: '' },
     { path: '/blog',          title: 'Mi Blog',      icon:'fa fa-ravelry',  class: '' },
+    { path: '/hc-paciente',          title: 'Mi H.C.',      icon:'fa fa-vcard-o',  class: '' },
 ];
 
 export const ROUTESProfesional: RouteInfo[] = [
@@ -28,7 +29,7 @@ export const ROUTESProfesional: RouteInfo[] = [
     { path: '/user',          title: 'Mi Perfil',      icon:'fa fa-user-circle-o',  class: '' },
     { path: '/paciente',          title: 'Pacientes',      icon:'fa fa-users',  class: '' },
     { path: '/entrevista',          title: 'Entrevistas Admisión',      icon:'fa fa-file-text-o',  class: '' },
-    { path: '/turno',          title: 'Turnos',      icon:'fa fa-calendar',  class: '' },
+    { path: '/agenda-profesional',          title: 'Agenda',      icon:'fa fa-calendar',  class: '' },
     
 ];
 

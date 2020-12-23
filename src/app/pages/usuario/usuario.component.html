@@ -17,7 +17,7 @@
           </div>
           <div class="col-md-4 ">
             <div class="form-group">
-              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre_tipo_persona == 'Admin'"
                 (click)="buscarUsuariosActivos()">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
               </button>
@@ -25,7 +25,7 @@
           </div>
           <div class="col-md-4 text-right">
             <div class="form-group">
-              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+              <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre_tipo_persona == 'Admin'"
                 data-target="#modalAltaEditar" (click)="onNuevoUsuario(modalAltaEdicion)">
                 Nuevo Usuario
               </button>
@@ -40,13 +40,13 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <!-- <th>Tipo</th> -->
-              <th class="text-right" *ngIf="identity.nombre == 'Admin'"></th>
+              <th class="text-right" *ngIf="identity.nombre_tipo_persona == 'Admin'"></th>
             </thead>
             <tbody *ngFor="let u of usuarios">
               <tr>
                 <td> {{u.nombre}}</td>
                 <td> {{u.apellido}}</td>
-                <td  class="text-right" *ngIf="identity.nombre == 'Admin'">
+                <td  class="text-right" *ngIf="identity.nombre_tipo_persona == 'Admin'">
                   <button type="button" class="btn btn-success" data-toggle="modal" 
                     (click) = "onEditar(modalAltaEdicion,u)" data-target="#modalAltaEditar">
                     Modificar
@@ -149,7 +149,7 @@
             <div class="row">
               <div class="col-md-6 pl">
                   <br>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                  <button type="button" class="btn btn-warning" data-toggle="modal" *ngIf="identity.nombre_tipo_persona == 'Admin'"
                     (click)="onResetPasswd()">Reiniciar Contraseña
                   </button>
               </div>
@@ -186,7 +186,7 @@
               </div>
               <div class="col-md-2 pr">
                 <input type="submit" value= "OK"
-                  [disabled]="accionForm.invalid" class="btn btn-success">
+                  [disabled]="accionForm.invalid" class="btn btn-primary">
                 <!-- <div class="form-group">
                 </div> -->
               </div>
@@ -225,7 +225,7 @@
               <div class="col-md-8 pl">
               </div>
               <div class="col-md-4 pr">
-                <input type="submit" value= "SI" class="btn btn-success">
+                <input type="submit" value= "SI" class="btn btn-primary">
                 <input type="button" value= "NO" class="btn btn-danger" (click)="c('Close click')">
               </div>
             </div>

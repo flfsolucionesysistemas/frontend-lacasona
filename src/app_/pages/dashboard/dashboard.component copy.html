@@ -1,0 +1,310 @@
+<div class="row">
+  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card">
+      <div class="card-header">        
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title">Tratamiento Vigente</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" *ngIf = "identity.nombre == 'Paciente'">
+        <div class="card">
+          <div class="card-header bg-info">
+            <h6>{{tratamiento.programa_tratamiento}}</h6>
+          </div>
+
+          <div class="card-body bg-light">
+            <h6 class="card-text">
+              Ses. Psiquiatricas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psiquiatricas}}</label></h6>
+            <h6 class="card-text">
+              Ses. Psicologicas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psicologicas}}</label></h6>
+            <h6 class="card-text">
+              Ses. Grupales: &nbsp; &nbsp; <label>{{tratamiento.sesiones_grupales}}</label></h6>
+            <h6 class="card-text">
+              Frecuencia: &nbsp; &nbsp; <label>{{tratamiento.frecuencia}}</label></h6>
+            <h6 class="card-text">
+              T. Probable:&nbsp; &nbsp; <label>{{tratamiento.tiempo_probable}}</label></h6>
+            <h6 class="card-text">
+              Costo Mensual:&nbsp; &nbsp; <label>{{tratamiento.costo_mensual}}</label></h6>
+          </div>
+          
+          <!-- <div class="card-footer">
+          </div> -->
+        </div>
+      </div>
+
+      <div class="col-md-8" *ngIf = "identity.nombre == 'Paciente'">
+        <div class="card">
+          <div class="card-header bg-info">
+            <h6>Timeline</h6>
+          </div>
+
+          <div class="card card-plain">
+            <div class="card-content">
+                <ul class="timeline">
+                    <li class="timeline-inverted">
+                        <div class="timeline-badge danger">
+                            <i class="material-icons">card_travel</i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <span class="label label-danger">Some Title</span>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Wifey made the best Father's.</p>
+                            </div>
+                            <h6>
+                                <i class="ti-time"></i> 11 hours ago via Twitter
+                            </h6>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge success">
+                            <i class="material-icons">extension</i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <span class="label label-success">Another One</span>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Thank God for the support of my wife and real friends.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- <li class="timeline-inverted">
+                        <div class="timeline-badge info">
+                            <i class="material-icons">fingerprint</i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <span class="label label-info">Another Title</span>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Called I Miss the Old Kanye That’s all it was Kanye And I love you like Kanye loves Kanye Famous viewing @ Figueroa and 12th in downtown LA 11:10PM</p>
+                                <hr>
+                                <div class="dropdown pull-left">
+                                    <button type="button" class="btn btn-round btn-info dropdown-toggle" data-toggle="dropdown">
+                                        <i class="material-icons">build</i>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <li>
+                                            <a href="#action">Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#action">Another action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#here">Something else here</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#link">Separated link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-badge warning">
+                            <i class="material-icons">flight_land</i>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <span class="label label-warning">Another One</span>
+                            </div>
+                            <div class="timeline-body">
+                                <p>Tune into Big Boy's 92.3 I'm about to play the first single from Cruel Winter Tune into Big Boy's 92.3 I'm about to play the first single from Cruel Winter also to Kim’s hair and makeup Lorraine jewelry and the whole style squad at Balmain and the Yeezy team. Thank you Anna for the invite thank you to the whole Vogue team</p>
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>    
+  
+  <!-- <div *ngIf = "identity.nombre == 'Paciente'">
+    <button type="button" class="btn btn-success" (click)="onBlog()">
+      Ir al blog
+    </button>
+  </div> -->
+
+
+  <!-- <div class="col-lg-3 col-md-6 col-sm-6" *ngIf="identity.nombre=='Profesional' || identity.nombre=='Admin'">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-2">
+            <div class="icon-big text-center icon-warning">
+              <i class="fa fa-video-camera" aria-hidden="true" style="color:red"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-10">
+            <div class="numbers">
+              <p class="card-category">Entrevistas Pend.</p>
+              <p class="card-title">{{entrevistasPendientes}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-eye" [routerLink]="['/entrevista']"></i>VER 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6" *ngIf=" identity.nombre=='Admin'">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-2">
+            <div class="icon-big text-center icon-warning">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="col-12 col-md-10">
+            <div class="numbers">
+              <p class="card-category">Cant. Pacientes</p>
+              <p class="card-title">{{cantidadPacientes}}<p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-eye" [routerLink]="['/paciente']"></i>VER  
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-vector text-danger"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Errors</p>
+              <p class="card-title">23
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-clock-o"></i> In the last hour
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-body ">
+        <div class="row">
+          <div class="col-5 col-md-4">
+            <div class="icon-big text-center icon-warning">
+              <i class="nc-icon nc-favourite-28 text-primary"></i>
+            </div>
+          </div>
+          <div class="col-7 col-md-8">
+            <div class="numbers">
+              <p class="card-category">Followers</p>
+              <p class="card-title">+45K
+                <p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-refresh"></i> Update now
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="row">-->
+
+ <!-- <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Users Behavior</h5>
+        <p class="card-category">24 Hours performance</p>
+      </div>
+      <div class="card-body ">
+        <canvas id=chartHours width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer ">
+        <hr>
+        <div class="stats">
+          <i class="fa fa-history"></i> Updated 3 minutes ago
+        </div>
+      </div>
+    </div>
+  </div> -->
+<!-- </div>
+<div class="row"> -->
+  <!--<div class="col-md-4">
+    <div class="card ">
+      <div class="card-header ">
+        <h5 class="card-title">Email Statistics</h5>
+        <p class="card-category">Last Campaign Performance</p>
+      </div>
+      <div class="card-body ">
+        <canvas id="chartEmail"></canvas>
+      </div>
+      <div class="card-footer ">
+        <div class="legend">
+          <i class="fa fa-circle text-primary"></i> Opened
+          <i class="fa fa-circle text-warning"></i> Read
+          <i class="fa fa-circle text-danger"></i> Deleted
+          <i class="fa fa-circle text-gray"></i> Unopened
+        </div>
+        <hr>
+        <div class="stats">
+          <i class="fa fa-calendar"></i> Number of emails sent
+        </div>
+      </div>
+    </div>
+  </div>  -->
+  <!-- <div class="col-md-8">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">NASDAQ: AAPL</h5>
+        <p class="card-category">Line Chart with Points</p>
+      </div>
+      <div class="card-body">
+        <canvas id="speedChart" width="400" height="100"></canvas>
+      </div>
+      <div class="card-footer">
+        <div class="chart-legend">
+          <i class="fa fa-circle text-info"></i> Tesla Model S
+          <i class="fa fa-circle text-warning"></i> BMW 5 Series
+        </div>
+        <hr/>
+        <div class="card-stats">
+          <i class="fa fa-check"></i> Data information certified
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

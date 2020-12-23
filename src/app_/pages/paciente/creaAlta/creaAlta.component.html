@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          Registro de Alta
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #altaForm="ngForm">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <h6 style="margin-top: 0.5em;">Paciente </h6>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h5>{{nombreApellidoPaciente}}</h5>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <div class="form-group">
+                <h6 style="margin-top: 0.5em;">CGIP</h6>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h5>{{cgip}}</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+                <h6 style="margin-top: 0.5em;">Profesional</h6> 
+            </div>
+            <div class="col-md-3">
+              <h5>{{identity.apellido}} {{identity.nombre}}</h5>
+            </div>
+          </div>
+
+          <div class="row">
+            <!-- <div class="col-md-2">
+              <h6 style="margin-top: 0.5em;">Fecha de inicio</h6> 
+            </div>
+            <div class="col-md-3">
+              <h5>{{fecha_inicio | date: 'dd-MM-yyyy'}}</h5>
+            </div> -->
+
+            <div class="col-md-2">
+              <h6 style="margin-top: 0.5em;">Fecha de alta</h6> 
+            </div>
+            <div class="col-md-3">
+              <input type="date" requerid class="form-control" [(ngModel)]="hc_tratamiento.fecha_alta" 
+                name="fecha_alta">
+            </div>
+
+          </div>  
+
+          &nbsp;
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <h6>motivo del alta *</h6>
+                <textarea type="text" class="form-control" name="motivo_alta" 
+                  required [(ngModel)]="hc_tratamiento.motivo_alta">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <h6>consideraciones del alta</h6>
+                <textarea type="text" class="form-control" name="consideraciones_alta" 
+                     [(ngModel)]="hc_tratamiento.consideraciones_alta">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-10">
+              <div class="form-group">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <button type="button" class="btn btn-primary"  *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="altaForm.invalid" (click)= onAlta() style="margin-top: 65px;">
+                  Crear
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div> 
+    </div>
+</div>

@@ -23,6 +23,10 @@ import { CreaEvaluacionComponent } from "../../pages/paciente/creaEvaluacion/cre
 import { CreaEvolucionComponent } from "../../pages/paciente/creaEvolucion/creaEvolucion.component";
 import { CreaAltaComponent } from "../../pages/paciente/creaAlta/creaAlta.component";
 import { BlogComponent } from "../../pages/blog/blog.component";
+import { GuardiaComponent } from "../../pages/guardia/guardia.component";
+import { PagoComponent } from "../../pages/pago/pago.component";
+import { AgendaProfesionalComponent } from "../../pages/agenda_profesional/agenda-profesional.component";
+import { ResumenHcComponent } from "../../pages/resumen_hc/resumen_hc.component";
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -43,4 +47,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'crearEvaluacion/:idPaciente', component:CreaEvaluacionComponent},
     { path: 'crearAlta/:idPaciente', component:CreaAltaComponent},
     { path: 'blog', component:BlogComponent},
+    { path: 'pago', component:PagoComponent},
+    { path: 'guardia', component:GuardiaComponent},
+    { path: 'hc-paciente', component:ResumenHcComponent},
+    { path: 'agenda-profesional', component:AgendaProfesionalComponent}
 ];

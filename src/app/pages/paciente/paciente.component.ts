@@ -45,7 +45,6 @@ export class PacienteComponent implements OnInit{
           console.log('error');                    
         }else{
           this.hc_tratamientos = response.body;
-          // this.vigentes= true;
         }
       })
     }
@@ -80,7 +79,6 @@ export class PacienteComponent implements OnInit{
     }
     
     onCrearEvolucion(paciente){
-      // console.log(paciente);
       let idPaciente=paciente.id_persona;
       this._router.navigate(['/crearEvolucion', idPaciente]);
     }

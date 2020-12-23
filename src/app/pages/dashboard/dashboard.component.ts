@@ -5,13 +5,15 @@ import { Tratamiento } from "../../modelos/tratamiento";
 
 import { UsuarioService } from "../../servicios/usuario";
 import { TratamientoService } from "../../servicios/tratamiento";
+import { Hc_TratamientoService } from "../../servicios/hc_tratamiento";
+
 
 @Component({
     selector: 'dashboard-cmp',
     moduleId: module.id,
     styleUrls: ['dashboard.style.less'],
     templateUrl: 'dashboard.component.html',
-    providers:[UsuarioService, TratamientoService],
+    providers:[UsuarioService,Hc_TratamientoService, TratamientoService],
 })
 
 export class DashboardComponent implements OnInit{
@@ -26,12 +28,12 @@ export class DashboardComponent implements OnInit{
 
   
   coloresFase6 = [{ico: 'blanco'},{ico: 'amarillo'},{ico: 'azul'},{ ico: 'verde'},{ ico: 'violeta'},{ ico: 'naranja'}];
-
   coloresFase4 = [{ico: 'blanco'},{ico: 'amarillo'},{ico: 'verde'},{ico: 'naranja'}];  
 
   constructor( 
     private _usuarioServicio:UsuarioService,
     private _tratamientoServicio: TratamientoService,
+    private _hcTratamientoServicio:Hc_TratamientoService
   ){
     this.identity = this._usuarioServicio.getIdentity();
     this.token = this._usuarioServicio.getToken();
@@ -41,67 +43,96 @@ export class DashboardComponent implements OnInit{
   ngOnInit(){
     // this.buscarUsuarioTipo(3);
     // this.buscarUsuarioTipo(4);
-    if(this.identity.nombre == 'Paciente'){
-      this.buscarTratamientoActivoPorPaciente();
-      this.buscarTimeline();
+    if(this.identity.nombre_tipo_persona == 'Paciente'){
+      this.buscarTratamientoActivoPorPaciente();      
     }
   }
 
   buscarTimeline(){
-    // this._tratamientoServicio.getTimeline(this.identity.id_persona).toPromise().then((response: any) => {
-    //   if(response == null){
-    //     console.log('error');                    
-    //   }else{
-    //     var cantFases = response.sql[0].fases;
-    //     var listaTime = response.sql;
-    //     var limit = listaTime.length;
-    //     this.timeline = [];
+    var faseActual;
+    var fases;
+    var consideraciones:string;
+    var fecha;
 
-    //     if(cantFases == 6){
-    //       for (var i = 0; i < limit  ; i++){
-    //         var dato = {
-    //           ico: this.coloresFase6[i].ico,
-    //           titulo: listaTime[i].fase,
-    //           texto: listaTime[i].consideraciones_evaluacion
-    //         };    
-    //         this.timeline.push(dato);
-    //       }
-    //     }else{
-    //       if(cantFases == 4){
-    //         for (var i = 0; i < limit; i++){
-    //           var dato = {ñ
-    //             ico: this.coloresFase4[i].ico,
-    //             titulo: listaTime[i].fase - 1,
-    //             texto: listaTime[i].consideraciones_evaluacion
-    //           };                
-    //           this.timeline.push(dato);
-    //         }
-    //       }
-    //     }
+    this.timeline=[];
+    this._hcTratamientoServicio.getFaseActual(this.identity.id_persona).toPromise().then((response : any)=>{
+      if(response == null){
+          console.log('error');
+      }else{
+        // console.log(response);
+        faseActual = response.sql[0].fase; 
+        fases = response.sql[0].fases;        
+        consideraciones = response.sql[0].consideraciones_evaluacion;
         
-    //     if(cantFases == 6){
-    //       for (var j = limit; j <= listaTime[0].fases; j++){
-    //         var datoNo = {
-    //           ico: 'gray-lighter',
-    //           titulo: j,
-    //           texto: 'Pendiente'
-    //         };    
-    //         this.timeline.push(datoNo);
-    //     }
-    //     }else{
-    //       if(cantFases == 4){
-    //         for (var j = limit; j <= listaTime[0].fases - 1 ; j++){
-    //             var datoNo = {
-    //               ico: 'gray-lighter',
-    //               titulo: j,
-    //               texto: 'Pendiente'
-    //             };    
-    //             this.timeline.push(datoNo);
-    //         }  
-    //     }
-    //   }  
-    //   }
-    // });
+        if(fases == 6){
+          for (var i=0;i<fases;i++){
+            // console.log('indice',i);
+            // console.log('indice',i);
+            if(i < faseActual){
+              var dato = {
+                ico: this.coloresFase6[i].ico,
+                titulo: i,
+                texto: "Avanzado",
+                actual: ""                
+              }
+            }
+            if(i == faseActual){
+              var dato = {
+                ico: this.coloresFase6[i].ico,
+                titulo: i,
+                texto: consideraciones,
+                actual: "Fase actual"       
+              };  
+            }  
+            if(i > faseActual){
+              var dato = {
+                ico: this.coloresFase6[i].ico,
+                titulo: i,
+                texto: "Pendiente",
+                actual: ""       
+              };    
+            }
+
+            this.timeline.push(dato);
+          }
+        }else{
+          if(fases == 4){
+            for (var i=0;i<fases;i++){
+              //si es la misma fase completo con las consideraciones
+              
+              if(i < faseActual){
+                var dato = {
+                  ico: this.coloresFase4[i].ico,
+                  titulo: i,
+                  texto: "Avanzado",
+                  actual: ""       
+                }
+              }
+
+              if(i == faseActual){
+                var dato = {
+                  ico: this.coloresFase4[i].ico,
+                  titulo: i,
+                  texto: consideraciones,
+                  actual: ""       
+                };  
+              }  
+              if(i > faseActual){
+                var dato = {
+                  ico: this.coloresFase4[i].ico,
+                  titulo: i,
+                  texto: "",
+                  actual: ""       
+                };    
+              }
+
+              this.timeline.push(dato);
+            }  
+          }
+        }
+      }    
+    });    
+    // console.log(this.timeline);
   }
 
   buscarTratamientoActivoPorPaciente(){
@@ -111,6 +142,7 @@ export class DashboardComponent implements OnInit{
       }else{
         this.tratamiento = response.sql[0];
         // console.log(response);
+        this.buscarTimeline();
       }  
     });
   }

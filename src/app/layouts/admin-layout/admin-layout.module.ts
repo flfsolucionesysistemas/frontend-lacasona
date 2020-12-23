@@ -24,7 +24,10 @@ import { TurnoComponent} from "../../pages/turno/turno.component";
 import { CobranzaComponent } from "../../pages/cobranza/cobranza.component";
 import { TratamientoComponent } from "../../pages/tratamiento/tratamiento.component";
 import { BlogComponent } from "../../pages/blog/blog.component";
-
+import { GuardiaComponent } from "../../pages/guardia/guardia.component";
+import { PagoComponent } from '../../pages/pago/pago.component';
+import { AgendaProfesionalComponent } from "../../pages/agenda_profesional/agenda-profesional.component";
+import { ResumenHcComponent } from "../../pages/resumen_hc/resumen_hc.component";
 
 @NgModule({
   imports: [
@@ -37,6 +40,7 @@ import { BlogComponent } from "../../pages/blog/blog.component";
   declarations: [
     DashboardComponent,
     UserComponent,
+    PagoComponent,
     BlogComponent,
     CreaAltaComponent,
     CreaEvolucionComponent,
@@ -49,7 +53,10 @@ import { BlogComponent } from "../../pages/blog/blog.component";
     EntrevistaComponent,
     PacienteComponent,
     UsuarioComponent,
+    GuardiaComponent,
+    AgendaProfesionalComponent,
     CreaEntrevistaComponent,
+    ResumenHcComponent,
     CreaTratamientoComponent,    
   ]
 })

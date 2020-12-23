@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
+  <div class="col-md-12" *ngIf = "identity.nombre_tipo_persona == 'Paciente'">
     <div class="card">
       <div class="card-header">        
         <div class="row">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4" *ngIf = "identity.nombre == 'Paciente'">
+      <div class="col-md-4" *ngIf = "identity.nombre_tipo_persona == 'Paciente'">
         <div class="card">
           <div class="card-header bg-info">
             <h6>{{tratamiento.programa_tratamiento}}</h6>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="col-md-8" *ngIf = "identity.nombre == 'Paciente'">
+      <div class="col-md-8" *ngIf = "identity.nombre_tipo_persona == 'Paciente'">
         <div class="card">
           <div class="card-header bg-info">
             <h6>Timeline</h6>

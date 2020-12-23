@@ -1,0 +1,225 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card" *ngIf="!historiaClinicaCreada">
+      <div class="card-header">
+        <h5 class="card-title">
+          Datos de Identificación          
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #hcForm="ngForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Fecha de Entrevista {{fecha | date: 'dd-MM-yyyy'}}</h6>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Profesional {{identity.nombre_usuario}}</h6>
+              </div>
+            </div>
+          </div>  
+          &nbsp;
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Tipo de Consulta</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.tipo_consulta" name="tipo_consulta">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Telefono</h6>
+                <input type="text" class="form-control" value="{{telefonoPaciente}}" [(ngModel)]="registro.telefono" name="telefono">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <h6>Nombre y Apellido</h6>
+                <input type="text" class="form-control" value="{{apellidoPaciente}}, {{nombrePaciente}}" disabled>
+                <!-- <input type="text" class="form-control" [(ngModel)]="registro.tipo_consulta" name="tipo_consulta"> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <h6>Obra social</h6>
+                <input type="text" requerid class="form-control" [(ngModel)]="registro.obra_social" name="obra_social">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <h6>Nro afiliado</h6>
+                <input type="text" requerid class="form-control" [(ngModel)]="registro.numero_afiliado" name="numero_afiliado">
+              </div>
+            </div>
+          </div>          
+  
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>fecha de nacimiento</h6>
+                <input type="date" requerid class="form-control" [(ngModel)]="registro.fecha_nacimiento" 
+                (focusout)=calculaEdad() name="fecha_nacimiento">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>Edad</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.edad" name="edad" disabled>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>estado civil</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.estado_civil" name="estado_civil">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <h6>Nro documento</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.numero_documento" 
+                  requerid name="numero_documento" (focusout)=generaCGIP()>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <h6>Domicilio</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.domicilio" name="domicilio">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <h6>Ocupacion</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.ocupacion" name="ocupacion">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Motivo consulta</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.motivo" name="motivo">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Derivado por</h6>
+                <input type="text" class="form-control" [(ngModel)]="registro.derivado_por" name="derivado_por">
+              </div>
+            </div>
+          </div>
+          
+          &nbsp;
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <h6 style="margin-top: 0.5em;">Código Generado para la Identificación del Pacienteo (CGIP): </h6>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <h5 style="color: blue; font-weight:bold;">{{cgip}}</h5>
+              </div>
+            </div>
+          </div>
+
+          &nbsp;
+          <h5 class="card-title">
+            Antecedentes Personales           
+          </h5>
+          <hr />
+          &nbsp;
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>Padecimiento actual</h6>
+                <textarea type="text" class="form-control" name="padecimiento" 
+                     [(ngModel)]="registro.padecimiento">
+                </textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>antecedentes de la situacion actual</h6>
+                <textarea type="text" class="form-control" name="antecedentes" 
+                     [(ngModel)]="registro.antecedentes">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>diagnostico presuntivo (segun dsm iv)</h6>
+                <textarea type="text" class="form-control" name="diagnostico" 
+                     [(ngModel)]="registro.diagnostico">
+                </textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h6>tratamiento anteriores</h6>
+                <textarea type="text" class="form-control" name="tratamiento" 
+                     [(ngModel)]="registro.tratamiento">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <h6>farmacologia</h6>
+                <textarea type="text" class="form-control" name="farmacologia" 
+                     [(ngModel)]="registro.farmacologia">
+                </textarea>
+              </div>
+            </div>
+            <div class="col-md-6 ">
+              <div class="form-group">
+                <h6>derrivacion psicoterapia</h6>
+                <textarea type="text" class="form-control" name="derivacion_psicoterapia" 
+                     [(ngModel)]="registro.derivacion_psicoterapia">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 ">
+              <!-- <div class="form-group">
+                <h6>farmacologia</h6>
+                <textarea type="text" class="form-control" name="farmacologia" 
+                     [(ngModel)]="registro.farmacologia">
+                </textarea>
+              </div> -->
+            </div>
+            <div class="col-md-6 "  style="text-align: right;">
+              <div class="form-group" >
+                <button type="button" class="btn btn-primary" *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="hcForm.invalid" (click)= onCreaHc(1) style="margin-top: 65px;">
+                  Admitir
+                </button>&nbsp;
+                <button type="button" class="btn btn-danger" *ngIf="identity.nombre == 'Profesional'" 
+                  [disabled]="hcForm.invalid" (click)= onCreaHc(0) style="margin-top: 65px;">
+                  No Admitir
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+</div>

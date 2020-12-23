@@ -8,5 +8,7 @@ export class TurnoModificacion{
 		public id_tipo_turno:number,
 		public turno_tratamiento: number,
 		public costo_base: number,
+		public id_profesional: number,
+		public profesional_disponible:number,
 	){}
 }

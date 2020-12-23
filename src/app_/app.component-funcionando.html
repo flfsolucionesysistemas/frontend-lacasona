@@ -1,0 +1,284 @@
+<!-- SI ESTA IDENTIFICADO INGRESA AL DASHBOARD -->
+<div *ngIf="identity" [class.hidden]="!identity">
+	<router-outlet></router-outlet>
+</div>
+
+<!-- SINO PANTALLA INICIAL  -->
+<div  *ngIf="!identity">
+  <div class="card bg-dark">
+    <div class="card-header">
+      <!-- <p>cdf</p> -->
+      <div class="row justify-content-center h-1">
+        <!-- <img src="../assets/img/lacasona.png"> -->
+        <h2 style="color: white;">{{titulo}}</h2>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="modal-content">
+        <!-- <div class="full-page login-page" filter-color="black" data-image="../assets/img/portada.png"></div> -->
+        <img class="portada" src="../assets/img/portada.png">
+        <!-- <div class="full-page login-page" filter-color="black" data-image="../assets/img/login.jpeg"> -->
+
+      </div>
+      <div class="row justify-content-center align-items-center">
+          <button (click)="miCasona(content1)" class="btn btn-dark">
+            Mi Casona
+          </button>
+          <button (click)="consulta(content2)" class="btn btn-success">
+            Solicitar Turno
+          </button>
+          <button (click)="conocerMas(content3)" class="btn btn-dark">
+            Conocer Mas
+          </button>
+      </div>  
+    </div>
+    <div class="card-footer">
+      <div class="row justify-content-center align-items-center">
+        <h4 style="color: white;">FLF sistemas 2021</h4>
+      </div>
+    </div>
+  </div>
+    
+    
+  <!-- MODAL LOGIN MI CASONA -->
+  <ng-template #content1 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Mi Casona</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+    <br>
+    <div class="row justify-content-md-center">
+      <div class="col-md-12">
+        <div class="container ">
+          <div class="row justify-content-center align-items-center">
+            <div  class="col-md-11">
+              <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-md-6 pr-1">
+                    <div class="form-group">
+                      <label>Usuario</label>
+                      <input type="text" class="form-control" name="usuario" 
+                        required [(ngModel)]="usuario.usuario"/>
+                    </div>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <div class="form-group">
+                      <label>Contraseña</label>
+                      <input type="text" class="form-control" name="clave" 
+                        required [(ngModel)]="usuario.clave"/>
+                    </div>
+                  </div>
+                </div>  
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <div class="form-group">
+                    </div>
+                  </div>
+                  <div class="col-md-3 pl-1">
+                    <input type="submit" value= "Enviar"
+                    [disabled]="loginForm.invalid" class="btn btn-success">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="modal-footer">
+      <a href="" >Olvide mi contraseña</a>
+    </div>
+  </ng-template> 
+  <!-- FIN MODAL LOGIN -->              
+
+  <!-- MODAL CONSULTA -->
+  <ng-template #content2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Reserva tu consulta </h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+    <div class="modal-body px-0">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-10">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #ConsultaForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Nombre*</label>
+                  <input type="text" class="form-control" name="nombre" 
+                    required [(ngModel)]="usuario.nombre"/>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Apellido*</label>
+                  <input type="text" class="form-control" name="apellido" 
+                    required [(ngModel)]="usuario.apellido"/>
+                </div>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Teléfono*</label>
+                  <input type="text" class="form-control" name="Teléfono" 
+                    required [(ngModel)]="usuario.telefono"/>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Código Postal*</label>
+                  <input type="text" class="form-control" name="codigoPostal" 
+                    required [(ngModel)]="usuario.codigoPostal"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Fecha*</label>                        
+                  <input type="date">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Hora*</label><br>
+                  <input type="time">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-9 pr-1">
+                <div class="form-group">
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <input type="submit" value= "Enviar"
+                [disabled]="ConsultaForm.invalid" class="btn btn-success">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template> 
+  <!-- FIN MODAL CONSULTA -->              
+
+  <!-- MODAL CONOCER MAS -->
+  <ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Conoce mas de nosotros</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+    <div class="modal-body px-0">
+      <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
+        <div class="px-2" style="overflow-y: auto; height: 100%;">
+          <div class="row justify-content-md-center" >
+              <div class="col-md-11">
+                <p>
+                  La Casona web en psicointeraccion.com es un innovador sistema de intervención clínica completamente
+                  en línea que atiende y trata diversas modalidades de malestar psicológicos tales como depresiones,
+                  ansiedad, adicciones a sustancias, alcoholismo, duelo, pánico, somatizaciones, fobias, trastornos de
+                  alimentación (bulimia y anorexia), terapias de pareja. Todo ello a partir de programas de intervención
+                  llevados adelante por un Equipo Terapéutico compuesto por psicólogos, psiquiatras y psicólogos sociales,
+                  con una vasta trayectoria en psicoterapias.
+                </p>
+                <p>
+                  Una experiencia de reparación y rehabilitación única en su tipo sin necesidad de moverte de tu casa y
+                  organizado a partir de tus propios tiempos.
+                  ¿Cómo formar parte de esta experiencia terapéutica?
+                </p>
+                <p>
+                  1 - Solicitar una consulta de ingreso para evaluar el caso.
+                </p>
+                <p>
+                  2 - En la consulta de ingreso se define el programa terapéutico apropiado para el caso.
+                </p>
+                <p>
+                  3 - Ingreso a la comunidad psicointeraccion.com, que es una plataforma interactiva en línea a partir de la
+                  cual se desarrolla todo el tratamiento.
+                </p>
+                <p>
+                  4 - A partir de ese momento los equipos tratantes trabajan directamente con el paciente, su familia y con
+                  los grupos de apoyo, promoviendo los cambios necesarios para mejorar tu calidad de vida.
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="modal-footer">
+    </div>
+  </ng-template> 
+  <!-- FIN MODAL CONOCENOS MAS -->              
+
+  <!-- MODAL CONOCER MAS -->
+  <!-- <ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Conoce mas de nosotros</h4>
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+    <div class="modal-body modal-lg">
+      <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
+        <div class="px-2" style="overflow-y: auto; height: 100%;">
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <p>
+                La Casona web en psicointeraccion.com es un innovador sistema de intervención clínica completamente
+                en línea que atiende y trata diversas modalidades de malestar psicológicos tales como depresiones,
+                ansiedad, adicciones a sustancias, alcoholismo, duelo, pánico, somatizaciones, fobias, trastornos de
+                alimentación (bulimia y anorexia), terapias de pareja. Todo ello a partir de programas de intervención
+                llevados adelante por un Equipo Terapéutico compuesto por psicólogos, psiquiatras y psicólogos sociales,
+                con una vasta trayectoria en psicoterapias.
+              </p>
+              <p>
+                Una experiencia de reparación y rehabilitación única en su tipo sin necesidad de moverte de tu casa y
+                organizado a partir de tus propios tiempos.
+              </p>
+            </div>
+
+            <div class="col-md-6 pl-1">
+              <p>
+                ¿Cómo formar parte de esta experiencia terapéutica?
+              </p>
+              <p>
+                1 - Solicitar una consulta de ingreso para evaluar el caso.
+              </p>
+              <p>
+                2 - En la consulta de ingreso se define el programa terapéutico apropiado para el caso.
+              </p>
+              <p>
+                3 - Ingreso a la comunidad psicointeraccion.com, que es una plataforma interactiva en línea a partir de la
+                cual se desarrolla todo el tratamiento.
+              </p>
+              <p>
+                4 - A partir de ese momento los equipos tratantes trabajan directamente con el paciente, su familia y con
+                los grupos de apoyo, promoviendo los cambios necesarios para mejorar tu calidad de vida.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"></div>      
+  </ng-template>  -->
+  <!-- FIN MODAL CONOCENOS MAS -->              
+
+</div>

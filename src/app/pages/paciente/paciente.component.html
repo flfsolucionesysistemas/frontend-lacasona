@@ -4,7 +4,7 @@
       <div class="card-header">
         <div class="row">
           <div class="col-md-8">
-            <h4 class="card-title">Historias Clinicas Con Tratamiento Vigentes</h4>
+            <h4 class="card-title" *ngIf = "identity.nombre_tipo_persona == 'Profesional'">Historias Clinicas Con Tratamiento Vigentes</h4>
           </div>
           <div class="col-md-2">
           </div>
@@ -43,28 +43,24 @@
                 <td>{{paciente.dni}}</td>
                 <td>{{paciente.programa_tratamiento}}</td>
                 <td>{{paciente.fecha_inicio | date: 'dd-MM-yyyy'}}</td>
-                <td *ngIf = "identity.nombre == 'Profesional'">                  
+                <td *ngIf = "identity.nombre_tipo_persona == 'Profesional'">                  
                   <button type="button" class="btn btn-warning" (click)="onVerHC(paciente)"
                     data-toggle="tooltip" data-placement="top" title="Ver H.C.">
-                    <!-- <i class="fa fa-file-pdf-o" aria-hidden="true"></i> -->
                     Ver H.C.
                   </button>
                   &nbsp;
                   <button type="button" class="btn btn-success" (click)="onCrearEvolucion(paciente)"
                     data-toggle="tooltip" data-placement="top" title="Crear Evolución">
-                    <!-- <i class="fa fa-file-code-o" aria-hidden="true"></i> -->
                     Evolución
                   </button>
                   &nbsp;
                   <button type="button" class="btn btn-primary" (click)="onCrearEvaluacion(paciente)"
                     data-toggle="tooltip" data-placement="top" title="Crear Evaluación">
-                    <!-- <i class="fa fa-file-o" aria-hidden="true"></i> -->
                     Evaluación
                   </button>                  
                   &nbsp;
                   <button type="button" class="btn btn-sencondary" (click)="onAltaHC(paciente)"
                     data-toggle="tooltip" data-placement="top" title="Alta H.C.">
-                    <!-- <i class="fa fa-file-pdf-o" aria-hidden="true"></i> -->
                     Alta H.C.
                   </button>
                 </td>

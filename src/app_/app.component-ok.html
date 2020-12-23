@@ -1,0 +1,117 @@
+<!-- SI ESTA IDENTIFICADO INGRESA AL DASHBOARD -->
+<div *ngIf="identity" [class.hidden]="!identity">
+	<router-outlet></router-outlet>
+</div>
+
+<!-- SINO PANTALLA INICIAL  -->
+<div class="container" *ngIf="!identity"> 	
+    <div class="miJumbotron">
+        <div class="row justify-content-center align-items-center"> 
+            <img src="../assets/img/lacasona.png">
+            <h1 class="display-1">{{titulo}}</h1>
+        </div>
+    </div>    
+    <div class="miJumbotron2">
+      <h1 class="display-1">{{titulo}}</h1>
+    </div>
+    <!-- <div class="miJumbotron2">
+      <div class="row justify-content-center align-items-center"> 
+        <h1 class="display-1">{{titulo}}</h1>
+        <h3 class="display-7">{{subtitulo}}</h3>
+      </div>
+    </div>     -->
+    <div class="footer">
+      <div class="row justify-content-center align-items-center">
+          <!-- <p class="text-center text-info"> -->
+          <button (click)="miCasona(content1)" class="btn btn-dark">
+            Mi Casona
+          </button>
+          <!-- </p> -->
+          <button (click)="miCasona(content2)" class="btn btn-success">
+            Solicitar Turno
+          </button>
+          <button (click)="conocerMas(content3)" class="btn btn-dark">
+            Conocer Mas
+          </button>
+      </div>
+    </div>
+    <!-- MODAL LOGIN MI CASONA -->
+    <ng-template #content1 let-c="close" let-d="dismiss">
+      <div class="modal-header">
+          <h4 class="modal-title">Ingreso a Mi Casona</h4>
+      </div>
+      <br>
+      <div class="row justify-content-md-center">
+        <div class="col-md-10">
+          <div class="container ">
+            <div class="row justify-content-center align-items-center">
+                <div  class="col-md-8">
+                  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                      <input class="form-control" 
+                        #user="ngModel" name="usuario" [(ngModel)]= "usuario.usuario" placeholder="Usuario" 
+                        required>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" 
+                        type="password" #password="ngModel" name="passwd" [(ngModel)]="usuario.passwd" placeholder="Contraseña" 
+                        required>
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" name="submit" class="btn btn-info btn-block" value="Ingresar">
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="modal-footer">
+          <!-- <button (click)="evaluarCodigo()" class="btn btn-primary" type="button">Confirmar</button>-->
+          <button (click)="c('Close click')" class="btn btn-secondary" type="button">Cancelar</button>
+      </div>
+    </ng-template> 
+    <!-- FIN MODAL LOGIN -->              
+
+
+
+  <!-- MODAL CONOCER MAS -->
+  <ng-template #content3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Conoce mas de nosotros</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row justify-content-md-center">
+          <div class="col-md-10">
+            <p>
+              La Casona web en psicointeraccion.com es un innovador sistema de intervención clínica completamente
+              en línea que atiende y trata diversas modalidades de malestar psicológicos tales como depresiones,
+              ansiedad, adicciones a sustancias, alcoholismo, duelo, pánico, somatizaciones, fobias, trastornos de
+              alimentación (bulimia y anorexia), terapias de pareja. Todo ello a partir de programas de intervención
+              llevados adelante por un Equipo Terapéutico compuesto por psicólogos, psiquiatras y psicólogos sociales,
+              con una vasta trayectoria en psicoterapias.
+            </p>
+            <p>
+              Una experiencia de reparación y rehabilitación única en su tipo sin necesidad de moverte de tu casa y
+              organizado a partir de tus propios tiempos.
+              ¿Cómo formar parte de esta experiencia terapéutica?
+            </p>
+            <!-- <p>
+              1 - Solicitar una consulta de ingreso para evaluar el caso.
+              2 - En la consulta de ingreso se define el programa terapéutico apropiado para el caso.
+              3 - Ingreso a la comunidad psicointeraccion.com, que es una plataforma interactiva en línea a partir de la
+              cual se desarrolla todo el tratamiento.
+              4 - A partir de ese momento los equipos tratantes trabajan directamente con el paciente, su familia y con
+              los grupos de apoyo, promoviendo los cambios necesarios para mejorar tu calidad de vida.
+            </p> -->
+          </div>
+      </div>
+    </div>
+    <br>
+    <div class="modal-footer">
+        <button (click)="c('Close click')" class="btn btn-secondary" type="button">Volver</button>
+    </div>
+  </ng-template> 
+  <!-- FIN MODAL DE CODIGO DE CONFIRMACION -->              
+</div>

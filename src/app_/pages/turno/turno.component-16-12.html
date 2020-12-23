@@ -1,0 +1,254 @@
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-3" *ngIf="identity.nombre == 'Admin'" >
+              <div class="form-group" style="margin-top: 0.5em;">
+                <select id= "tipo" name="tipo"
+                    [(ngModel)] = "tipo" requerid class="form-control" (ngModelChange)="onSeleccionarPorTipo(tipo)">
+                    <option>Tratamiento</option>
+                    <option>Entrevista</option>
+                </select>
+              </div>            
+            </div>
+            <div class="col-md-3" >
+              <div class="form-group" style="margin-top: 0.5em;">
+                <input type="date" class="form-control" [(ngModel)]="fechaFiltro"  (ngModelChange)="filtrarLista()"
+                  name="filtro">
+              </div>
+            </div>
+            <div class="col-md-1" *ngIf="identity.nombre == 'Admin'" >
+            </div>
+            <div class="col-md-5" *ngIf="identity.nombre == 'Profesional'" >
+            </div>
+            <div class="col-md-2 text-right" *ngIf="identity.nombre == 'Admin'" >
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                  data-target="#modalNuevoTurno" (click)="onNuevoTurno(modalNuevoTurno)">
+                  Nuevo Turno
+                </button>
+              </div>
+            </div>
+            <div class="col-md-2 text-right" *ngIf="identity.nombre == 'Admin'" >
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" data-toggle="modal" *ngIf="identity.nombre == 'Admin'"
+                  data-target="#modalNuevoTurno" (click)="onNuevoTurno(modalNuevoTurno)">
+                  Nuevo Turno
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INICIO LISTA Admin-->
+        <div class="card-body" *ngIf="identity.nombre == 'Admin'">
+          <div class="table-responsive scroll" style="max-height: 500px">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Inicio</th>
+                <th>Estado</th>
+                <th *ngIf="identity.nombre == 'Admin'">Costo Base</th>
+                <th class="text-right" *ngIf="identity.nombre == 'Admin'"></th>
+              </thead>
+              <tbody *ngFor="let t of turnos">
+                <tr>
+                  <td *ngIf="t.turno_tratamiento == 1"> Tratamiento </td>
+                  <td *ngIf="t.turno_tratamiento == 0"> Entrevista </td>
+                  <td> {{t.fecha | date:'dd-MM-yyyy' : 'UTC'}} </td>
+                  <td> {{t.hora}}</td>
+                  <td *ngIf="t.estado == '1'"> Libre </td>
+                  <td *ngIf="t.estado == '0'"> {{t.observacion}} </td>
+                  <td *ngIf="identity.nombre == 'Admin'"> ${{t.costo_base}}</td>
+                  <!-- si es admin y el turno es de consulta, puede marcar como ocupado -->
+                  <td  class="text-right" *ngIf="identity.nombre == 'Admin'">
+                    <button *ngIf= 't.turno_tratamiento == 0' type="button" class="btn btn-success" 
+                      (click) = "onMarcarOcupado(t)" data-toggle="tooltip" data-placement="top" title="Marcar Ocupado">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- FIN LISTA -->
+      </div>  
+    </div>
+
+
+
+    <!-- CARD DISPONIBLES -->
+    <div class="col-md-6" *ngIf = "identity.nombre == 'Profesional'">
+      <div class="card">
+        <div class="card-header">
+          <h6 style="margin-top: 1.5em; margin-bottom: 2em;">Disponibles</h6>  
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive scroll" style="max-height: 400px">
+          <!-- LISTA TURNOS DISPONIBLES -->
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Inicio</th>
+                <th></th>
+              </thead>
+              <tbody *ngFor="let t of turnosP">
+                <tr>
+                  <td *ngIf="t.turno_tratamiento == 1"> Tratamiento </td>
+                  <td *ngIf="t.turno_tratamiento == 0"> Entrevista </td>
+                  <td> {{t.fecha | date:'dd-MM-yyyy' : 'UTC'}} </td>
+                  <td> {{t.hora}}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                      (click)="enviarSeleccionado(t)">
+                      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>  
+                  </td>
+                </tr>
+              </tbody>
+            </table>          
+          </div>
+          <!-- FIN TURNOS DISPONIBLES -->
+        </div>
+      </div>
+    </div>
+    <!-- fin CARD DISPONIBLES -->
+
+
+    <!-- CARD SELECCIONADOS -->
+    <div class="col-md-6" *ngIf = "identity.nombre == 'Profesional'">
+      <div class="card">
+        <div class="card-header">
+          <h6>Seleccionados   &nbsp;
+            <button *ngIf = "mostrarAsignar" type="button" class="btn btn-success" (click)="asignarTurnos()">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          </h6>
+        </div>
+
+        <div class="card-body">
+          <div class="table-responsive  scroll" style="max-height: 400px">
+          <!-- LISTA TURNOS DISPONIBLES -->
+            <table class="table">
+              <thead class=" text-primary">
+                <th></th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Inicio</th>
+              </thead>
+              <tbody *ngFor="let t of turnosPS">
+                <tr>
+                  <td>
+                    <button type="button" class="btn btn-danger" (click)="enviarDisponible(t)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>  
+                  </td>
+                  <td *ngIf="t.turno_tratamiento == 1"> Tratamiento </td>
+                  <td *ngIf="t.turno_tratamiento == 0"> Entrevista </td>
+                  <td> {{t.fecha | date:'dd-MM-yyyy' : 'UTC'}} </td>
+                  <td> {{t.hora}}</td>
+                </tr>
+              </tbody>
+            </table>          
+          </div>
+          <!-- FIN TURNOS DISPONIBLES -->
+      </div>
+    </div>
+    <!-- fin CARD seleccionados -->
+  </div>
+
+  <!-- MODAL ALTA/MODIFICAR USUARIO -->
+  <ng-template #modalNuevoTurno let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <!-- <h4 class="modal-title">Crear Nuevos Turnos</h4> -->
+        <button type="button">
+          <i class="fa fa-close" (click)="c('Close click')"></i>
+        </button>
+    </div>
+
+    <div class="modal-body px-3">
+      <div class="row justify-content-md-center" >
+        <div class="col-md-12">
+          <p style="color: red;">*Datos obligatorios</p>
+
+          <form #accionForm="ngForm" (ngSubmit)="onAccion()">
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <div class="form-group" style="margin-top: 0.5em;">
+                    <label>Tipo Turno *</label>
+                    <select id= "tipoCreacion" name="tipoCreacion"
+                        [(ngModel)] = "tipoCreacion" requerid class="form-control" (ngModelChange)="onNuevoTurnoTipo(tipoCreacion)">
+                        <option>Tratamiento</option>
+                        <option>Entrevista</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 pr" *ngIf="tipoCreacion=='Entrevista'">
+                <label style="margin-top: 0.5em;">Costo Base *</label>
+                <input type="text" class="form-control" name="costo_base" 
+                  required [(ngModel)]="turno.costo_base"/>
+              </div>
+            </div>  
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Fecha Turnos *</label>
+                  <input type="date" requerid class="form-control" [(ngModel)]="turno.fecha" 
+                    name="fecha">
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Hora de Inicio *</label>
+                  <input type="time" class="form-control" name="hora" 
+                    required [(ngModel)]="hora"/>                
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pl">
+                <div class="form-group">
+                  <label>Cantidad de Turnos *</label>
+                  <input type="text" class="form-control" name="cantidad" 
+                    [(ngModel)]="cantidad" requerid/>
+                </div>
+              </div>
+              <div class="col-md-6 pr">
+                <div class="form-group">
+                  <label>Duracion * (minutos)</label>
+                  <input type="text" class="form-control" name="duracion" 
+                    [(ngModel)]="duracion" requerid/>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row">
+              <div class="col-md-10 pl">              
+              </div>
+              <div class="col-md-2 pr">
+                <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+                <div class="form-group">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </ng-template>
+</div>
+

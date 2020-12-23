@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
+    <!-- <div class="card">
+      <div class="card-header">        
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title">Tratamiento Vigente</h4>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="col-md-6" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h6>Mi tratamiento: {{tratamiento.programa_tratamiento}}</h6>
+      </div>
+
+      <div class="card-body bg-light">
+        <h6 class="card-text">
+          Ses. Psiquiatricas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psiquiatricas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Psicologicas: &nbsp; &nbsp; <label>{{tratamiento.sesiones_psicologicas}}</label></h6>
+        <h6 class="card-text">
+          Ses. Grupales: &nbsp; &nbsp; <label>{{tratamiento.sesiones_grupales}}</label></h6>
+        <h6 class="card-text">
+          Frecuencia: &nbsp; &nbsp; <label>{{tratamiento.frecuencia}}</label></h6>
+        <h6 class="card-text">
+          T. Probable:&nbsp; &nbsp; <label>{{tratamiento.tiempo_probable}}</label></h6>
+        <h6 class="card-text">
+          Fases:&nbsp; &nbsp; <label> {{tratamiento.fases}}</label></h6>
+        <h6 class="card-text">
+          Costo Mensual:&nbsp; &nbsp; <label>$ {{tratamiento.costo_mensual}}</label></h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card">
+      <div class="card-header bg-info">
+        <h6>informacion util</h6>
+      </div>
+
+      <div class="card-body bg-light">
+        <h6 class="card-text">
+          Proximo Turno: &nbsp; &nbsp; <label>xx/xx/xx</label></h6>
+        <h6 class="card-text">
+          Profesional del proximo turno: &nbsp; &nbsp; <label>XXX xxxx</label></h6>
+        <h6 class="card-text">
+          Proximo Vencimiento de Pago: &nbsp; &nbsp; <label>xx/xx/xx</label></h6>
+        <h6 class="card-text">
+          Próximo Pago: &nbsp; &nbsp; <label>$ XX</label></h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="col-md-2" *ngIf = "identity.nombre == 'Paciente'"> -->
+    <!-- <div class="card ">
+      <div class="card-header bg-info">
+          <h6>Timeline</h6>
+      </div>
+      <div class="card-body ">
+          <div class="col-md-12">
+            <div style="display:inline-block;width:100%;overflow-y:auto;">
+            <ul class="timeline timeline-horizontal">
+                <li class="timeline-item" *ngFor="let i of timeline">
+                  <div class="timeline-badge {{i.ico}}" ><i class="glyphicon glyphicon-check"></i></div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h4 class="timeline-title" style="margin-top: 1em;">{{i.titulo}}</h4>
+                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{i.texto}}</p>
+                    </div>
+                  </div>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+  <!-- </div> -->
+
+  <div class="col-md-12" *ngIf = "identity.nombre == 'Paciente'">
+    <div class="card ">
+      <div class="card-header bg-info">
+          <h6>Fases del tratamiento</h6>
+      </div>
+      <div class="card-body ">
+          <div class="col-md-12">
+            <div style="display:inline-block;width:100%;overflow-y:auto;">
+            <ul class="timeline timeline-horizontal">
+                <li class="timeline-item" *ngFor="let i of timeline">
+                  <div class="timeline-badge {{i.ico}}">
+                    <!-- data-toggle="tooltip" data-placement="bottom" title="{{i.texto}}"> -->
+                    <i class="glyphicon glyphicon-check"></i>
+                  </div>
+                  <div class="timeline-panel">
+                    <div class="timeline-heading">
+                      <h5 class="timeline-title" >Fase: {{i.titulo}}</h5>
+                    </div>
+                    <div class="timeline-body">
+                      <p>{{i.texto}}</p>
+                      <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>
+                         {{i.actual}}</small></p>
+                    </div>
+                  </div>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

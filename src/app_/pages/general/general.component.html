@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12">    
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          Factor Multiplicador Por Provincias      
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #accionForm="ngForm" (ngSubmit)="onAccion(provincia)">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Provincia</label>
+                <select id= "provincia" name="provincia" 
+                    [(ngModel)] = "provincia" requerid class="form-control">
+                    <option *ngFor="let provincia of provincias"  [ngValue] = "provincia">
+                        {{provincia.nombre}}        
+                    </option>
+                </select>
+              </div>
+            </div>                                    
+            <div class="col-md-1">
+              <div class="form-group">
+                <label>Factor </label>
+                <input type="text" class="form-control" name="factor" 
+                  required [(ngModel)]="provincia.factor"/>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Valor de Consulta</label>
+                <input type="text" class="form-control" name="valor" 
+                  required [(ngModel)]="provincia.factor * precioConsulta" disabled/>
+              </div>
+            </div>
+            <div class="col-md-1" style="margin-top: 1rem;">
+              <input type="submit" value= "OK"
+                  [disabled]="accionForm.invalid" class="btn btn-success">
+            </div>
+          </div>
+        </form>
+      </div> 
+    </div>
+  </div>
+  
+  <!-- <div class="col-md-4">    
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          Costo Base Consulta
+        </h5>
+      </div>
+      <hr />
+      <div class="card-body">
+        <form #updateTurnoForm="ngForm" (ngSubmit)="onUpdateTurno(turno)">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label>Costo Base</label>
+                <input type="text" class="form-control" name="costo_base" 
+                  required [(ngModel)]="turno.costo_base"/>
+              </div>
+            </div>
+            <div class="col-md-2" style="margin-top: 1rem;">
+              <input type="submit" value= "OK"
+                  [disabled]="updateTurno.invalid" class="btn btn-success">
+            </div>
+          </div>
+        </form>
+    </div> 
+  </div>   -->
+</div>
